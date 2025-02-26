@@ -1,7 +1,10 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
-namespace NaughtyAttributes.Test
+namespace ASPax.Test
 {
+    using ASPax.Attributes.Drawer;
+
     public enum TestEnum
     {
         None = 0,
@@ -21,7 +24,7 @@ namespace NaughtyAttributes.Test
         public EnumFlagsNest1 nest1;
     }
 
-    [System.Serializable]
+    [Serializable]
     public class EnumFlagsNest1
     {
         [EnumFlags]
@@ -30,7 +33,7 @@ namespace NaughtyAttributes.Test
         public EnumFlagsNest2 nest2;
     }
 
-    [System.Serializable]
+    [Serializable]
     public class EnumFlagsNest2
     {
         [EnumFlags]

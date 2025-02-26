@@ -1,25 +1,24 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
 using UnityEditor;
 using UnityEditorInternal;
-using System.Collections.Generic;
+using UnityEngine;
 
-namespace NaughtyAttributes.Editor
+namespace ASPax.Editor
 {
+    using ASPax.Attributes.Drawer.SpecialCases;
+
     public class ReorderableListPropertyDrawer : SpecialCasePropertyDrawerBase
     {
-        public static readonly ReorderableListPropertyDrawer Instance = new ReorderableListPropertyDrawer();
-
-        private readonly Dictionary<string, ReorderableList> _reorderableListsByPropertyName = new Dictionary<string, ReorderableList>();
-
+        public static readonly ReorderableListPropertyDrawer Instance = new();
+        private readonly Dictionary<string, ReorderableList> _reorderableListsByPropertyName = new();
         private GUIStyle _labelStyle;
 
         private GUIStyle GetLabelStyle()
         {
-            if (_labelStyle == null)
+            _labelStyle ??= new(EditorStyles.boldLabel)
             {
-                _labelStyle = new GUIStyle(EditorStyles.boldLabel);
-                _labelStyle.richText = true;
-            }
+                richText = true
+            };
 
             return _labelStyle;
         }
@@ -33,12 +32,10 @@ namespace NaughtyAttributes.Editor
         {
             if (property.isArray)
             {
-                string key = GetPropertyKeyName(property);
+                var key = GetPropertyKeyName(property);
 
                 if (_reorderableListsByPropertyName.TryGetValue(key, out ReorderableList reorderableList) == false)
-                {
-                    return 0;
-                }
+                    return 0f;
 
                 return reorderableList.GetHeight();
             }
@@ -50,9 +47,9 @@ namespace NaughtyAttributes.Editor
         {
             if (property.isArray)
             {
-                string key = GetPropertyKeyName(property);
-
                 ReorderableList reorderableList = null;
+                var key = GetPropertyKeyName(property);
+
                 if (!_reorderableListsByPropertyName.ContainsKey(key))
                 {
                     reorderableList = new ReorderableList(property.serializedObject, property, true, true, true, true)
@@ -65,7 +62,7 @@ namespace NaughtyAttributes.Editor
 
                         drawElementCallback = (Rect r, int index, bool isActive, bool isFocused) =>
                         {
-                            SerializedProperty element = property.GetArrayElementAtIndex(index);
+                            var element = property.GetArrayElementAtIndex(index);
                             r.y += 1.0f;
                             r.x += 10.0f;
                             r.width -= 10.0f;
@@ -85,17 +82,13 @@ namespace NaughtyAttributes.Editor
                 reorderableList = _reorderableListsByPropertyName[key];
 
                 if (rect == default)
-                {
                     reorderableList.DoLayoutList();
-                }
                 else
-                {
                     reorderableList.DoList(rect);
-                }
             }
             else
             {
-                string message = typeof(ReorderableListAttribute).Name + " can be used only on arrays or lists";
+                var message = typeof(ReorderableListAttribute).Name + " can be used only on arrays or lists";
                 NaughtyEditorGUI.HelpBox_Layout(message, MessageType.Warning, context: property.serializedObject.targetObject);
                 EditorGUILayout.PropertyField(property, true);
             }
@@ -108,29 +101,25 @@ namespace NaughtyAttributes.Editor
 
         private Object GetAssignableObject(Object obj, ReorderableList list)
         {
-            System.Type listType = PropertyUtility.GetPropertyType(list.serializedProperty);
-            System.Type elementType = ReflectionUtility.GetListElementType(listType);
+            var listType = PropertyUtility.GetPropertyType(list.serializedProperty);
+            var elementType = ReflectionUtility.GetListElementType(listType);
 
             if (elementType == null)
-            {
                 return null;
-            }
 
-            System.Type objType = obj.GetType();
+            var objType = obj.GetType();
 
             if (elementType.IsAssignableFrom(objType))
-            {
                 return obj;
-            }
 
             if (objType == typeof(GameObject))
             {
                 if (typeof(Transform).IsAssignableFrom(elementType))
                 {
-                    Transform transform = ((GameObject)obj).transform;
+                    var transform = ((GameObject)obj).transform;
                     if (elementType == typeof(RectTransform))
                     {
-                        RectTransform rectTransform = transform as RectTransform;
+                        var rectTransform = transform as RectTransform;
                         return rectTransform;
                     }
                     else
@@ -156,29 +145,28 @@ namespace NaughtyAttributes.Editor
             {
                 case EventType.DragExited:
                     if (GUI.enabled)
-                    {
                         HandleUtility.Repaint();
-                    }
-
                     break;
 
                 case EventType.DragUpdated:
                 case EventType.DragPerform:
                     if (rect.Contains(currentEvent.mousePosition) && GUI.enabled)
                     {
-                        // Check each single object, so we can add multiple objects in a single drag.
-                        bool didAcceptDrag = false;
-                        Object[] references = DragAndDrop.objectReferences;
+                        var didAcceptDrag = false; // Check each single object, so we can add multiple objects in a single drag.
+                        var references = DragAndDrop.objectReferences;
+
                         foreach (Object obj in references)
                         {
-                            Object assignableObject = GetAssignableObject(obj, list);
+                            var assignableObject = GetAssignableObject(obj, list);
+
                             if (assignableObject != null)
                             {
                                 DragAndDrop.visualMode = DragAndDropVisualMode.Copy;
+
                                 if (currentEvent.type == EventType.DragPerform)
                                 {
                                     list.serializedProperty.arraySize++;
-                                    int arrayEnd = list.serializedProperty.arraySize - 1;
+                                    var arrayEnd = list.serializedProperty.arraySize - 1;
                                     list.serializedProperty.GetArrayElementAtIndex(arrayEnd).objectReferenceValue = assignableObject;
                                     didAcceptDrag = true;
                                 }
@@ -197,9 +185,7 @@ namespace NaughtyAttributes.Editor
             }
 
             if (usedEvent)
-            {
                 currentEvent.Use();
-            }
         }
     }
 }

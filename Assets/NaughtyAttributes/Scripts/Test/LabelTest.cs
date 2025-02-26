@@ -1,7 +1,10 @@
 using UnityEngine;
 
-namespace NaughtyAttributes.Test
+namespace ASPax.Test
 {
+    using ASPax.Attributes.Drawer;
+    using ASPax.Attributes.Meta;
+
     public class LabelTest : MonoBehaviour
     {
         [Label("Label 0")]

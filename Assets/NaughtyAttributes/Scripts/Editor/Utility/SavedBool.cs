@@ -1,11 +1,11 @@
 using UnityEditor;
 
-namespace NaughtyAttributes.Editor
+namespace ASPax.Editor
 {
     internal class SavedBool
     {
         private bool _value;
-        private string _name;
+        private readonly string _name;
 
         public bool Value
         {
@@ -16,9 +16,7 @@ namespace NaughtyAttributes.Editor
             set
             {
                 if (_value == value)
-                {
                     return;
-                }
 
                 _value = value;
                 EditorPrefs.SetBool(_name, value);

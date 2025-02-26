@@ -1,7 +1,11 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
-namespace NaughtyAttributes.Test
+namespace ASPax.Test
 {
+    using ASPax.Attributes.Drawer;
+    using ASPax.Attributes.Drawer.SpecialCases;
+
     public class SortingLayerTest : MonoBehaviour
     {
         [SortingLayer]
@@ -22,7 +26,7 @@ namespace NaughtyAttributes.Test
         }
     }
 
-    [System.Serializable]
+    [Serializable]
     public class SortingLayerNest1
     {
         [SortingLayer]
@@ -34,7 +38,7 @@ namespace NaughtyAttributes.Test
         public SortingLayerNest2 nest2;
     }
 
-    [System.Serializable]
+    [Serializable]
     public struct SortingLayerNest2
     {
         [SortingLayer]

@@ -1,15 +1,18 @@
 ﻿using System;
 
-namespace NaughtyAttributes
+namespace ASPax.Attributes.Meta
 {
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
     public class BoxGroupAttribute : MetaAttribute, IGroupAttribute
     {
-        public string Name { get; private set; }
+        private readonly string name;
+        private const string EMPTY = "";
 
-        public BoxGroupAttribute(string name = "")
+        public BoxGroupAttribute(string name = EMPTY)
         {
-            Name = name;
+            this.name = name;
         }
+
+        public string Name => name;
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NaughtyAttributes
+namespace ASPax.Attributes.Drawer
 {
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
     public class ShowAssetPreviewAttribute : DrawerAttribute
@@ -8,13 +8,16 @@ namespace NaughtyAttributes
         public const int DefaultWidth = 64;
         public const int DefaultHeight = 64;
 
-        public int Width { get; private set; }
-        public int Height { get; private set; }
+        private readonly int width;
+        private readonly int height;
 
         public ShowAssetPreviewAttribute(int width = DefaultWidth, int height = DefaultHeight)
         {
-            Width = width;
-            Height = height;
+            this.width = width;
+            this.height = height;
         }
+
+        public int Width => width;
+        public int Height => height;
     }
 }

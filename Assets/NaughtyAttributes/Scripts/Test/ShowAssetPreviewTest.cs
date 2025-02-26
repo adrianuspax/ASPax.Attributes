@@ -1,7 +1,9 @@
 using UnityEngine;
 
-namespace NaughtyAttributes.Test
+namespace ASPax.Test
 {
+    using ASPax.Attributes.Drawer;
+
     public class ShowAssetPreviewTest : MonoBehaviour
     {
         [ShowAssetPreview]

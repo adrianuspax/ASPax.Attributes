@@ -1,15 +1,17 @@
 ﻿using System;
 
-namespace NaughtyAttributes
+namespace ASPax.Attributes.Meta
 {
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
     public class LabelAttribute : MetaAttribute
     {
-        public string Label { get; private set; }
+        private readonly string label;
 
         public LabelAttribute(string label)
         {
-            Label = label;
+            this.label = label;
         }
+
+        public string Label => label;
     }
 }

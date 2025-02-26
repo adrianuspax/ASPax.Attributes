@@ -1,9 +1,7 @@
 ﻿using System;
 
-namespace NaughtyAttributes
+namespace ASPax.Attributes.Drawer.SpecialCases
 {
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
-    public class ReorderableListAttribute : SpecialCaseDrawerAttribute
-    {
-    }
+    public class ReorderableListAttribute : SpecialCaseDrawerAttribute { }
 }

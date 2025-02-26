@@ -1,27 +1,29 @@
 using UnityEngine;
 
-namespace NaughtyAttributes.Test
+namespace ASPax.Test
 {
+    using ASPax.Attributes.Drawer.SpecialCases;
+
     public class ShowNonSerializedFieldTest : MonoBehaviour
     {
 #pragma warning disable 414
         [ShowNonSerializedField]
-        private ushort myUShort = ushort.MaxValue;
+        private readonly ushort myUShort = ushort.MaxValue;
 
         [ShowNonSerializedField]
-        private short myShort = short.MaxValue;
+        private readonly short myShort = short.MaxValue;
 
         [ShowNonSerializedField]
-        private uint myUInt = uint.MaxValue;
+        private readonly uint myUInt = uint.MaxValue;
 
         [ShowNonSerializedField]
-        private int myInt = 10;
+        private readonly int myInt = 10;
 
         [ShowNonSerializedField]
-        private ulong myULong = ulong.MaxValue;
+        private readonly ulong myULong = ulong.MaxValue;
 
         [ShowNonSerializedField]
-        private long myLong = long.MaxValue;
+        private readonly long myLong = long.MaxValue;
 
         [ShowNonSerializedField]
         private const float PI = 3.14159f;

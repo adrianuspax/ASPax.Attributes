@@ -1,17 +1,19 @@
 ﻿using System;
 
-namespace NaughtyAttributes
+namespace ASPax.Attributes.Drawer
 {
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
     public class MinMaxSliderAttribute : DrawerAttribute
     {
-        public float MinValue { get; private set; }
-        public float MaxValue { get; private set; }
+        private readonly float minValue;
+        private readonly float maxValue;
 
         public MinMaxSliderAttribute(float minValue, float maxValue)
         {
-            MinValue = minValue;
-            MaxValue = maxValue;
+            this.minValue = minValue;
+            this.maxValue = maxValue;
         }
+
+        public (float min, float max) Value => (minValue, maxValue);
     }
 }

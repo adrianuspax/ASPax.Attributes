@@ -1,8 +1,13 @@
 ﻿using System;
 using UnityEngine;
 
-namespace NaughtyAttributes.Test
+namespace ASPax.Test
 {
+    using ASPax.Attributes.Drawer;
+    using ASPax.Attributes.Drawer.SpecialCases;
+    using ASPax.Attributes.Meta;
+    using ASPax.Attributes.Utility;
+
     public class HideIfTest : MonoBehaviour
     {
         public bool hide1;
@@ -33,7 +38,7 @@ namespace NaughtyAttributes.Test
         public HideIfNest1 nest1;
     }
 
-    [System.Serializable]
+    [Serializable]
     public class HideIfNest1
     {
         public bool hide1;
@@ -68,7 +73,7 @@ namespace NaughtyAttributes.Test
         public HideIfNest2 nest2;
     }
 
-    [System.Serializable]
+    [Serializable]
     public class HideIfNest2
     {
         public bool hide1;

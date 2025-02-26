@@ -1,7 +1,11 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
-namespace NaughtyAttributes.Test
+namespace ASPax.Test
 {
+    using ASPax.Attributes.Drawer;
+    using ASPax.Attributes.Drawer.SpecialCases;
+
     public class LayerTest : MonoBehaviour
     {
         [Layer]
@@ -22,7 +26,7 @@ namespace NaughtyAttributes.Test
         }
     }
 
-    [System.Serializable]
+    [Serializable]
     public class LayerNest1
     {
         [Layer]
@@ -34,7 +38,7 @@ namespace NaughtyAttributes.Test
         public LayerNest2 nest2;
     }
 
-    [System.Serializable]
+    [Serializable]
     public struct LayerNest2
     {
         [Layer]

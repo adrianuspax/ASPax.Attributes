@@ -1,15 +1,17 @@
 ﻿using System;
 
-namespace NaughtyAttributes
+namespace ASPax.Attributes.Meta
 {
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
     public class FoldoutAttribute : MetaAttribute, IGroupAttribute
     {
-        public string Name { get; private set; }
+        private readonly string name;
 
         public FoldoutAttribute(string name)
         {
-            Name = name;
+            this.name = name;
         }
+
+        public string Name => name;
     }
 }

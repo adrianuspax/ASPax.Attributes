@@ -1,8 +1,13 @@
 ﻿using System;
 using UnityEngine;
 
-namespace NaughtyAttributes.Test
+namespace ASPax.Test
 {
+    using ASPax.Attributes.Drawer;
+    using ASPax.Attributes.Drawer.SpecialCases;
+    using ASPax.Attributes.Meta;
+    using ASPax.Attributes.Utility;
+
     public class DisableIfTest : MonoBehaviour
     {
         public bool disable1;
@@ -33,7 +38,7 @@ namespace NaughtyAttributes.Test
         public DisableIfNest1 nest1;
     }
 
-    [System.Serializable]
+    [Serializable]
     public class DisableIfNest1
     {
         public bool disable1;
@@ -68,7 +73,7 @@ namespace NaughtyAttributes.Test
         public DisableIfNest2 nest2;
     }
 
-    [System.Serializable]
+    [Serializable]
     public class DisableIfNest2
     {
         public bool disable1;
@@ -101,7 +106,7 @@ namespace NaughtyAttributes.Test
         public Vector2 disableIfEnumFlagMulti;
     }
 
-    [System.Serializable]
+    [Serializable]
     public enum DisableIfEnum
     {
         Case0,

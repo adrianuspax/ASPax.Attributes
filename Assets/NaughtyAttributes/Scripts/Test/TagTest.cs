@@ -1,15 +1,15 @@
 using UnityEngine;
 
-namespace NaughtyAttributes.Test
+namespace ASPax.Test
 {
     public class TagTest : MonoBehaviour
     {
-        [Tag]
+        [Attributes.Drawer.Tag]
         public string tag0;
 
         public TagNest1 nest1;
 
-        [Button]
+        [Attributes.Drawer.SpecialCases.Button]
         private void LogTag0()
         {
             Debug.Log(tag0);
@@ -19,7 +19,7 @@ namespace NaughtyAttributes.Test
     [System.Serializable]
     public class TagNest1
     {
-        [Tag]
+        [Attributes.Drawer.Tag]
         public string tag1;
 
         public TagNest2 nest2;
@@ -28,7 +28,7 @@ namespace NaughtyAttributes.Test
     [System.Serializable]
     public struct TagNest2
     {
-        [Tag]
+        [Attributes.Drawer.Tag]
         public string tag2;
     }
 }

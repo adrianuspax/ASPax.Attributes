@@ -1,8 +1,11 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace NaughtyAttributes.Test
+namespace ASPax.Test
 {
+    using ASPax.Attributes.Drawer.SpecialCases;
+
     public class ReorderableListTest : MonoBehaviour
     {
         [ReorderableList]
@@ -24,7 +27,7 @@ namespace NaughtyAttributes.Test
         public List<MonoBehaviour> monoBehavioursList;
     }
 
-    [System.Serializable]
+    [Serializable]
     public struct SomeStruct
     {
         public int Int;

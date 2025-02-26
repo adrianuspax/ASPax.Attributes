@@ -3,20 +3,17 @@ using UnityEditor;
 using System;
 using System.Reflection;
 
-namespace NaughtyAttributes.Editor
+namespace ASPax.Editor
 {
-    [CustomPropertyDrawer(typeof(SortingLayerAttribute))]
+    [CustomPropertyDrawer(typeof(Attributes.Drawer.SortingLayerAttribute))]
     public class SortingLayerPropertyDrawer : PropertyDrawerBase
     {
         private const string TypeWarningMessage = "{0} must be an int or a string";
 
         protected override float GetPropertyHeight_Internal(SerializedProperty property, GUIContent label)
         {
-            bool validPropertyType = property.propertyType == SerializedPropertyType.String || property.propertyType == SerializedPropertyType.Integer;
-
-            return validPropertyType
-                ? GetPropertyHeight(property)
-                : GetPropertyHeight(property) + GetHelpBoxHeight();
+            var validPropertyType = property.propertyType == SerializedPropertyType.String || property.propertyType == SerializedPropertyType.Integer;
+            return validPropertyType ? GetPropertyHeight(property) : GetPropertyHeight(property) + GetHelpBoxHeight();
         }
 
         protected override void OnGUI_Internal(Rect rect, SerializedProperty property, GUIContent label)
@@ -42,27 +39,26 @@ namespace NaughtyAttributes.Editor
 
         private string[] GetLayers()
         {
-            Type internalEditorUtilityType = typeof(UnityEditorInternal.InternalEditorUtility);
-            PropertyInfo sortingLayersProperty = internalEditorUtilityType.GetProperty("sortingLayerNames", BindingFlags.Static | BindingFlags.NonPublic);
+            var internalEditorUtilityType = typeof(UnityEditorInternal.InternalEditorUtility);
+            var sortingLayersProperty = internalEditorUtilityType.GetProperty("sortingLayerNames", BindingFlags.Static | BindingFlags.NonPublic);
             return (string[])sortingLayersProperty.GetValue(null, new object[0]);
         }
 
         private static void DrawPropertyForString(Rect rect, SerializedProperty property, GUIContent label, string[] layers)
         {
-            int index = IndexOf(layers, property.stringValue);
-            int newIndex = EditorGUI.Popup(rect, label.text, index, layers);
-            string newLayer = layers[newIndex];
+            var index = IndexOf(layers, property.stringValue);
+            var newIndex = EditorGUI.Popup(rect, label.text, index, layers);
+            var newLayer = layers[newIndex];
 
             if (!property.stringValue.Equals(newLayer, StringComparison.Ordinal))
-            {
                 property.stringValue = layers[newIndex];
-            }
         }
 
         private static void DrawPropertyForInt(Rect rect, SerializedProperty property, GUIContent label, string[] layers)
         {
-            int index = 0;
-            string layerName = SortingLayer.IDToName(property.intValue);
+            var index = 0;
+            var layerName = SortingLayer.IDToName(property.intValue);
+
             for (int i = 0; i < layers.Length; i++)
             {
                 if (layerName.Equals(layers[i], StringComparison.Ordinal))
@@ -72,14 +68,12 @@ namespace NaughtyAttributes.Editor
                 }
             }
 
-            int newIndex = EditorGUI.Popup(rect, label.text, index, layers);
-            string newLayerName = layers[newIndex];
-            int newLayerNumber = SortingLayer.NameToID(newLayerName);
+            var newIndex = EditorGUI.Popup(rect, label.text, index, layers);
+            var newLayerName = layers[newIndex];
+            var newLayerNumber = SortingLayer.NameToID(newLayerName);
 
             if (property.intValue != newLayerNumber)
-            {
                 property.intValue = newLayerNumber;
-            }
         }
 
         private static int IndexOf(string[] layers, string layer)

@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
-namespace NaughtyAttributes.Editor
+namespace ASPax.Editor
 {
-    [CustomPropertyDrawer(typeof(AllowNestingAttribute))]
+    [CustomPropertyDrawer(typeof(Attributes.Drawer.AllowNestingAttribute))]
     public class AllowNestingPropertyDrawer : PropertyDrawerBase
     {
         protected override void OnGUI_Internal(Rect rect, SerializedProperty property, GUIContent label)

@@ -1,8 +1,14 @@
 using System;
 using UnityEngine;
 
-namespace NaughtyAttributes.Test
+namespace ASPax.Test
 {
+    using ASPax.Attributes.Utility;
+    using ASPax.Attributes.Validator;
+    using ASPax.Attributes.Drawer.SpecialCases;
+    using ASPax.Attributes.Drawer;
+    using ASPax.Attributes.Meta;
+
     public class EnableIfTest : MonoBehaviour
     {
         public bool enable1;

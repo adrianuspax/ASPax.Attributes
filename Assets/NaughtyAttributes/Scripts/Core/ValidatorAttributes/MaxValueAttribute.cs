@@ -1,20 +1,22 @@
 ﻿using System;
 
-namespace NaughtyAttributes
+namespace ASPax.Attributes.Validator
 {
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
     public class MaxValueAttribute : ValidatorAttribute
     {
-        public float MaxValue { get; private set; }
+        private readonly float maxValue;
 
         public MaxValueAttribute(float maxValue)
         {
-            MaxValue = maxValue;
+            this.maxValue = maxValue;
         }
 
         public MaxValueAttribute(int maxValue)
         {
-            MaxValue = maxValue;
+            this.maxValue = maxValue;
         }
+
+        public float MaxValue => maxValue;
     }
 }

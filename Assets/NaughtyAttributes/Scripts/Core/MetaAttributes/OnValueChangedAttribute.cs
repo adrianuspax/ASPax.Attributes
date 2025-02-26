@@ -1,15 +1,17 @@
 ﻿using System;
 
-namespace NaughtyAttributes
+namespace ASPax.Attributes.Meta
 {
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = true, Inherited = true)]
     public class OnValueChangedAttribute : MetaAttribute
     {
-        public string CallbackName { get; private set; }
+        private readonly string callbackName;
 
         public OnValueChangedAttribute(string callbackName)
         {
-            CallbackName = callbackName;
+            this.callbackName = callbackName;
         }
+
+        public string CallbackName => callbackName;
     }
 }

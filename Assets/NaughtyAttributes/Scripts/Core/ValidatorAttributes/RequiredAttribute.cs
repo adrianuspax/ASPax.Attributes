@@ -1,15 +1,17 @@
 ﻿using System;
 
-namespace NaughtyAttributes
+namespace ASPax.Attributes.Validator
 {
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
     public class RequiredAttribute : ValidatorAttribute
     {
-        public string Message { get; private set; }
+        private readonly string message;
 
         public RequiredAttribute(string message = null)
         {
-            Message = message;
+            this.message = message;
         }
+
+        public string Message => message;
     }
 }

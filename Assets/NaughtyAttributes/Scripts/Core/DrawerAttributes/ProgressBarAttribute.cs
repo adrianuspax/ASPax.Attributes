@@ -1,37 +1,36 @@
 ﻿using System;
 
-namespace NaughtyAttributes
+namespace ASPax.Attributes.Drawer
 {
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
     public class ProgressBarAttribute : DrawerAttribute
     {
-        public string Name { get; private set; }
-        public float MaxValue { get; set; }
-        public string MaxValueName { get; private set; }
-        public EColor Color { get; private set; }
+        private readonly string name;
+        private readonly float maxValue;
+        private readonly string maxValueName;
+        private readonly Utility.EColor color;
 
-        public ProgressBarAttribute(string name, float maxValue, EColor color = EColor.Blue)
+        public ProgressBarAttribute(string name, float maxValue, Utility.EColor color = Utility.EColor.Blue)
         {
-            Name = name;
-            MaxValue = maxValue;
-            Color = color;
+            this.name = name;
+            this.maxValue = maxValue;
+            this.color = color;
         }
 
-        public ProgressBarAttribute(string name, string maxValueName, EColor color = EColor.Blue)
+        public ProgressBarAttribute(string name, string maxValueName, Utility.EColor color = Utility.EColor.Blue)
         {
-            Name = name;
-            MaxValueName = maxValueName;
-            Color = color;
+            this.name = name;
+            this.maxValueName = maxValueName;
+            this.color = color;
         }
 
-        public ProgressBarAttribute(float maxValue, EColor color = EColor.Blue)
-            : this("", maxValue, color)
-        {
-        }
+        public ProgressBarAttribute(float maxValue, Utility.EColor color = Utility.EColor.Blue) : this(string.Empty, maxValue, color) { }
 
-        public ProgressBarAttribute(string maxValueName, EColor color = EColor.Blue)
-            : this("", maxValueName, color)
-        {
-        }
+        public ProgressBarAttribute(string maxValueName, Utility.EColor color = Utility.EColor.Blue) : this(string.Empty, maxValueName, color) { }
+
+        public string Name => name;
+        public float MaxValue =>  maxValue;
+        public string MaxValueName => maxValueName;
+        public Utility.EColor Color => color;
     }
 }

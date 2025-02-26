@@ -1,7 +1,11 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
-namespace NaughtyAttributes.Test
+namespace ASPax.Test
 {
+    using ASPax.Attributes.Drawer;
+    using ASPax.Attributes.Utility;
+
     public class HorizontalLineTest : MonoBehaviour
     {
         [HorizontalLine(color: EColor.Black)]
@@ -33,7 +37,7 @@ namespace NaughtyAttributes.Test
         public HorizontalLineNest1 nest1;
     }
 
-    [System.Serializable]
+    [Serializable]
     public class HorizontalLineNest1
     {
         [HorizontalLine]
@@ -42,7 +46,7 @@ namespace NaughtyAttributes.Test
         public HorizontalLineNest2 nest2;
     }
 
-    [System.Serializable]
+    [Serializable]
     public class HorizontalLineNest2
     {
         [HorizontalLine]

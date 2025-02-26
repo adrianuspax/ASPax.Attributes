@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NaughtyAttributes
+namespace ASPax.Attributes.Drawer
 {
     public enum EInfoBoxType
     {
@@ -12,13 +12,16 @@ namespace NaughtyAttributes
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = true, Inherited = true)]
     public class InfoBoxAttribute : DrawerAttribute
     {
-        public string Text { get; private set; }
-        public EInfoBoxType Type { get; private set; }
+        private readonly string text;
+        private readonly EInfoBoxType type;
 
         public InfoBoxAttribute(string text, EInfoBoxType type = EInfoBoxType.Normal)
         {
-            Text = text;
-            Type = type;
+            this.text = text;
+            this.type = type;
         }
+
+        public string Text => text;
+        public EInfoBoxType Type => type;
     }
 }

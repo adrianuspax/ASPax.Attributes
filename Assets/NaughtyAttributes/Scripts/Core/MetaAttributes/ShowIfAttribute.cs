@@ -1,26 +1,23 @@
 ﻿using System;
 
-namespace NaughtyAttributes
+namespace ASPax.Attributes.Meta
 {
     [AttributeUsage(AttributeTargets.Field | AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
     public class ShowIfAttribute : ShowIfAttributeBase
     {
-        public ShowIfAttribute(string condition)
-            : base(condition)
+        public ShowIfAttribute(string condition) : base(condition)
         {
-            Inverted = false;
+            isInverted = false;
         }
 
-        public ShowIfAttribute(EConditionOperator conditionOperator, params string[] conditions)
-            : base(conditionOperator, conditions)
+        public ShowIfAttribute(Utility.EConditionOperator conditionOperator, params string[] conditions) : base(conditionOperator, conditions)
         {
-            Inverted = false;
+            isInverted = false;
         }
 
-        public ShowIfAttribute(string enumName, object enumValue)
-            : base(enumName, enumValue as Enum)
+        public ShowIfAttribute(string enumName, object enumValue) : base(enumName, enumValue as Enum)
         {
-            Inverted = false;
+            isInverted = false;
         }
     }
 }

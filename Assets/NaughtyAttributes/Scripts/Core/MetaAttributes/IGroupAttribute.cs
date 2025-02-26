@@ -1,8 +1,4 @@
-﻿using UnityEngine;
-
-namespace NaughtyAttributes
+﻿namespace ASPax.Attributes.Meta
 {
-    public interface IGroupAttribute
-    {
-    }
+    public interface IGroupAttribute { }
 }

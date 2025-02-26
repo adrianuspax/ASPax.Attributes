@@ -1,17 +1,20 @@
 ﻿using System;
 
-namespace NaughtyAttributes
+namespace ASPax.Attributes.Validator
 {
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
     public class ValidateInputAttribute : ValidatorAttribute
     {
-        public string CallbackName { get; private set; }
-        public string Message { get; private set; }
+        private readonly string callbackName;
+        private readonly string message;
 
         public ValidateInputAttribute(string callbackName, string message = null)
         {
-            CallbackName = callbackName;
-            Message = message;
+            this.callbackName = callbackName;
+            this.message = message;
         }
+
+        public string CallbackName => callbackName;
+        public string Message => message;
     }
 }

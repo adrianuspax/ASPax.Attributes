@@ -1,7 +1,10 @@
+using System;
 using UnityEngine;
 
-namespace NaughtyAttributes.Test
+namespace ASPax.Test
 {
+    using ASPax.Attributes.Drawer;
+
     public class InfoBoxTest : MonoBehaviour
     {
         [InfoBox("Normal", EInfoBoxType.Normal)]
@@ -10,7 +13,7 @@ namespace NaughtyAttributes.Test
         public InfoBoxNest1 nest1;
     }
 
-    [System.Serializable]
+    [Serializable]
     public class InfoBoxNest1
     {
         [InfoBox("Warning", EInfoBoxType.Warning)]
@@ -19,7 +22,7 @@ namespace NaughtyAttributes.Test
         public InfoBoxNest2 nest2;
     }
 
-    [System.Serializable]
+    [Serializable]
     public class InfoBoxNest2
     {
         [InfoBox("Error", EInfoBoxType.Error)]

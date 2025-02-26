@@ -1,51 +1,46 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-namespace NaughtyAttributes.Editor
+namespace ASPax.Editor
 {
+    using ASPax.Attributes.Drawer.SpecialCases;
+    using ASPax.Attributes.Validator;
+
     public abstract class PropertyDrawerBase : PropertyDrawer
     {
         public sealed override void OnGUI(Rect rect, SerializedProperty property, GUIContent label)
         {
-            // Check if visible
-            bool visible = PropertyUtility.IsVisible(property);
+            var visible = PropertyUtility.IsVisible(property); // Check if visible
+
             if (!visible)
-            {
                 return;
-            }
 
-            // Validate
-            ValidatorAttribute[] validatorAttributes = PropertyUtility.GetAttributes<ValidatorAttribute>(property);
+            var validatorAttributes = PropertyUtility.GetAttributes<ValidatorAttribute>(property); // Validate
+
             foreach (var validatorAttribute in validatorAttributes)
-            {
                 validatorAttribute.GetValidator().ValidateProperty(property);
-            }
 
-            // Check if enabled and draw
-            EditorGUI.BeginChangeCheck();
-            bool enabled = PropertyUtility.IsEnabled(property);
+            EditorGUI.BeginChangeCheck(); // Check if enabled and draw
+
+            var enabled = PropertyUtility.IsEnabled(property);
 
             using (new EditorGUI.DisabledScope(disabled: !enabled))
             {
                 OnGUI_Internal(rect, property, PropertyUtility.GetLabel(property));
             }
 
-            // Call OnValueChanged callbacks
-            if (EditorGUI.EndChangeCheck())
-            {
+            if (EditorGUI.EndChangeCheck()) // Call OnValueChanged callbacks
                 PropertyUtility.CallOnValueChangedCallbacks(property);
-            }
         }
 
         protected abstract void OnGUI_Internal(Rect rect, SerializedProperty property, GUIContent label);
 
         sealed override public float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
-            bool visible = PropertyUtility.IsVisible(property);
+            var visible = PropertyUtility.IsVisible(property);
+
             if (!visible)
-            {
                 return 0.0f;
-            }
 
             return GetPropertyHeight_Internal(property, label);
         }
@@ -57,11 +52,10 @@ namespace NaughtyAttributes.Editor
 
         protected float GetPropertyHeight(SerializedProperty property)
         {
-            SpecialCaseDrawerAttribute specialCaseAttribute = PropertyUtility.GetAttribute<SpecialCaseDrawerAttribute>(property);
+            var specialCaseAttribute = PropertyUtility.GetAttribute<SpecialCaseDrawerAttribute>(property);
+
             if (specialCaseAttribute != null)
-            {
                 return specialCaseAttribute.GetDrawer().GetPropertyHeight(property);
-            }
 
             return EditorGUI.GetPropertyHeight(property, includeChildren: true);
         }
@@ -73,20 +67,24 @@ namespace NaughtyAttributes.Editor
 
         public void DrawDefaultPropertyAndHelpBox(Rect rect, SerializedProperty property, string message, MessageType messageType)
         {
-            float indentLength = NaughtyEditorGUI.GetIndentLength(rect);
-            Rect helpBoxRect = new Rect(
-                rect.x + indentLength,
-                rect.y,
-                rect.width - indentLength,
-                GetHelpBoxHeight());
+            var indentLength = NaughtyEditorGUI.GetIndentLength(rect);
+            var helpBoxRect = new Rect()
+            {
+                x = rect.x + indentLength,
+                y = rect.y,
+                width = rect.width - indentLength,
+                height = GetHelpBoxHeight()
+            };
 
             NaughtyEditorGUI.HelpBox(helpBoxRect, message, MessageType.Warning, context: property.serializedObject.targetObject);
 
-            Rect propertyRect = new Rect(
-                rect.x,
-                rect.y + GetHelpBoxHeight(),
-                rect.width,
-                GetPropertyHeight(property));
+            var propertyRect = new Rect()
+            {
+                x = rect.x,
+                y = rect.y + GetHelpBoxHeight(),
+                width = rect.width,
+                height = GetPropertyHeight(property)
+            };
 
             EditorGUI.PropertyField(propertyRect, property, true);
         }

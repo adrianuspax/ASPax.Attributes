@@ -1,10 +1,8 @@
-﻿using System;
-
-namespace NaughtyAttributes
+﻿namespace ASPax.Attributes.Utility
 {
     public enum EConditionOperator
     {
-        And,
-        Or
+        And = 0,
+        Or = 1
     }
 }

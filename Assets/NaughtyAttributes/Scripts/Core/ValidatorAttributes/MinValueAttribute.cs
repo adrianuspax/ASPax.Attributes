@@ -1,20 +1,22 @@
 ﻿using System;
 
-namespace NaughtyAttributes
+namespace ASPax.Attributes.Validator
 {
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
     public class MinValueAttribute : ValidatorAttribute
     {
-        public float MinValue { get; private set; }
+        private readonly float minValue;
 
         public MinValueAttribute(float minValue)
         {
-            MinValue = minValue;
+            this.minValue = minValue;
         }
 
         public MinValueAttribute(int minValue)
         {
-            MinValue = minValue;
+            this.minValue = minValue;
         }
+
+        public float MinValue => minValue;
     }
 }

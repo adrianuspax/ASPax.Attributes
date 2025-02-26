@@ -1,26 +1,23 @@
 ﻿using System;
 
-namespace NaughtyAttributes
+namespace ASPax.Attributes.Meta
 {
     [AttributeUsage(AttributeTargets.Field | AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
     public class HideIfAttribute : ShowIfAttributeBase
     {
-        public HideIfAttribute(string condition)
-            : base(condition)
+        public HideIfAttribute(string condition) : base(condition)
         {
-            Inverted = true;
+            isInverted = true;
         }
 
-        public HideIfAttribute(EConditionOperator conditionOperator, params string[] conditions)
-            : base(conditionOperator, conditions)
+        public HideIfAttribute(Utility.EConditionOperator conditionOperator, params string[] conditions) : base(conditionOperator, conditions)
         {
-            Inverted = true;
+            isInverted = true;
         }
 
-        public HideIfAttribute(string enumName, object enumValue)
-            : base(enumName, enumValue as Enum)
+        public HideIfAttribute(string enumName, object enumValue) : base(enumName, enumValue as Enum)
         {
-            Inverted = true;
+            isInverted = true;
         }
     }
 }

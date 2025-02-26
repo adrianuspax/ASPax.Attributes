@@ -1,7 +1,11 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
-namespace NaughtyAttributes.Test
+namespace ASPax.Test
 {
+    using ASPax.Attributes.Drawer;
+    using ASPax.Attributes.Utility;
+
     public class CurveRangeTest : MonoBehaviour
     {
         [CurveRange(0f, 0f, 1f, 1f, EColor.Yellow)]
@@ -18,7 +22,7 @@ namespace NaughtyAttributes.Test
 
         public CurveRangeNest1 nest1;
 
-        [System.Serializable]
+        [Serializable]
         public class CurveRangeNest1
         {
             [CurveRange(0, 0, 1, 1, EColor.Green)]
@@ -27,7 +31,7 @@ namespace NaughtyAttributes.Test
             public CurveRangeNest2 nest2;
         }
 
-        [System.Serializable]
+        [Serializable]
         public class CurveRangeNest2
         {
             [CurveRange(0, 0, 5, 5, EColor.Blue)]

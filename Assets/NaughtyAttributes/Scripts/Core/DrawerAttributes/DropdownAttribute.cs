@@ -2,26 +2,26 @@
 using System;
 using System.Collections.Generic;
 
-namespace NaughtyAttributes
+namespace ASPax.Attributes.Drawer
 {
+    public interface IDropdownList : IEnumerable<KeyValuePair<string, object>> { }
+
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
     public class DropdownAttribute : DrawerAttribute
     {
-        public string ValuesName { get; private set; }
+        private readonly string valuesName;
 
         public DropdownAttribute(string valuesName)
         {
-            ValuesName = valuesName;
+            this.valuesName = valuesName;
         }
-    }
 
-    public interface IDropdownList : IEnumerable<KeyValuePair<string, object>>
-    {
+        public string ValuesName => valuesName;
     }
 
     public class DropdownList<T> : IDropdownList
     {
-        private List<KeyValuePair<string, object>> _values;
+        private readonly List<KeyValuePair<string, object>> _values;
 
         public DropdownList()
         {
@@ -45,7 +45,8 @@ namespace NaughtyAttributes
 
         public static explicit operator DropdownList<object>(DropdownList<T> target)
         {
-            DropdownList<object> result = new DropdownList<object>();
+            DropdownList<object> result = new();
+
             foreach (var kvp in target)
             {
                 result.Add(kvp.Key, kvp.Value);

@@ -1,9 +1,9 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-namespace NaughtyAttributes.Editor
+namespace ASPax.Editor
 {
-    [CustomPropertyDrawer(typeof(InfoBoxAttribute))]
+    [CustomPropertyDrawer(typeof(Attributes.Drawer.InfoBoxAttribute))]
     public class InfoBoxDecoratorDrawer : DecoratorDrawer
     {
         public override float GetHeight()
@@ -13,42 +13,44 @@ namespace NaughtyAttributes.Editor
 
         public override void OnGUI(Rect rect)
         {
-            InfoBoxAttribute infoBoxAttribute = (InfoBoxAttribute)attribute;
-
-            float indentLength = NaughtyEditorGUI.GetIndentLength(rect);
-            Rect infoBoxRect = new Rect(
-                rect.x + indentLength,
-                rect.y,
-                rect.width - indentLength,
-                GetHelpBoxHeight());
+            var infoBoxAttribute = (Attributes.Drawer.InfoBoxAttribute)attribute;
+            var indentLength = NaughtyEditorGUI.GetIndentLength(rect);
+            var infoBoxRect = new Rect()
+            {
+                x = rect.x + indentLength,
+                y = rect.y,
+                width = rect.width - indentLength,
+                height = GetHelpBoxHeight()
+            };
+                
 
             DrawInfoBox(infoBoxRect, infoBoxAttribute.Text, infoBoxAttribute.Type);
         }
 
         private float GetHelpBoxHeight()
         {
-            InfoBoxAttribute infoBoxAttribute = (InfoBoxAttribute)attribute;
-            float minHeight = EditorGUIUtility.singleLineHeight * 2.0f;
-            float desiredHeight = GUI.skin.box.CalcHeight(new GUIContent(infoBoxAttribute.Text), EditorGUIUtility.currentViewWidth);
-            float height = Mathf.Max(minHeight, desiredHeight);
+            var infoBoxAttribute = (Attributes.Drawer.InfoBoxAttribute)attribute;
+            var minHeight = EditorGUIUtility.singleLineHeight * 2.0f;
+            var desiredHeight = GUI.skin.box.CalcHeight(new GUIContent(infoBoxAttribute.Text), EditorGUIUtility.currentViewWidth);
+            var height = Mathf.Max(minHeight, desiredHeight);
 
             return height;
         }
 
-        private void DrawInfoBox(Rect rect, string infoText, EInfoBoxType infoBoxType)
+        private void DrawInfoBox(Rect rect, string infoText, Attributes.Drawer.EInfoBoxType infoBoxType)
         {
-            MessageType messageType = MessageType.None;
+            var messageType = MessageType.None;
             switch (infoBoxType)
             {
-                case EInfoBoxType.Normal:
+                case Attributes.Drawer.EInfoBoxType.Normal:
                     messageType = MessageType.Info;
                     break;
 
-                case EInfoBoxType.Warning:
+                case Attributes.Drawer.EInfoBoxType.Warning:
                     messageType = MessageType.Warning;
                     break;
 
-                case EInfoBoxType.Error:
+                case Attributes.Drawer.EInfoBoxType.Error:
                     messageType = MessageType.Error;
                     break;
             }

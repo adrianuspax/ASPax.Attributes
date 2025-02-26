@@ -1,8 +1,13 @@
 using System;
 using UnityEngine;
 
-namespace NaughtyAttributes.Test
+namespace ASPax.Test
 {
+    using ASPax.Attributes.Drawer;
+    using ASPax.Attributes.Drawer.SpecialCases;
+    using ASPax.Attributes.Meta;
+    using ASPax.Attributes.Utility;
+
     public class ShowIfTest : MonoBehaviour
     {
         public bool show1;
@@ -68,7 +73,7 @@ namespace NaughtyAttributes.Test
         public ShowIfNest2 nest2;
     }
 
-    [System.Serializable]
+    [Serializable]
     public class ShowIfNest2
     {
         public bool show1;

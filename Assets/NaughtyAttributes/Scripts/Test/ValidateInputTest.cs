@@ -1,7 +1,11 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
-namespace NaughtyAttributes.Test
+namespace ASPax.Test
 {
+    using ASPax.Attributes.Drawer;
+    using ASPax.Attributes.Validator;
+
     public class ValidateInputTest : MonoBehaviour
     {
         [ValidateInput("NotZero0", "int0 must not be zero")]
@@ -17,7 +21,7 @@ namespace NaughtyAttributes.Test
         public ValidateInputInheritedNest inheritedNest;
     }
 
-    [System.Serializable]
+    [Serializable]
     public class ValidateInputNest1
     {
         [ValidateInput("NotZero1")]
@@ -32,7 +36,7 @@ namespace NaughtyAttributes.Test
         public ValidateInputNest2 nest2;
     }
 
-    [System.Serializable]
+    [Serializable]
     public class ValidateInputNest2
     {
         [ValidateInput("NotZero2")]
@@ -45,7 +49,7 @@ namespace NaughtyAttributes.Test
         }
     }
 
-    [System.Serializable]
+    [Serializable]
     public class ValidateInputInheritedNest : ValidateInputNest1
     {
     }

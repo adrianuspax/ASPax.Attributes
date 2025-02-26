@@ -1,22 +1,24 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
-namespace NaughtyAttributes.Editor
+namespace ASPax.Editor
 {
-    [CustomPropertyDrawer(typeof(HorizontalLineAttribute))]
+    using ASPax.Attributes.Utility;
+
+    [CustomPropertyDrawer(typeof(Attributes.Drawer.HorizontalLineAttribute))]
     public class HorizontalLineDecoratorDrawer : DecoratorDrawer
     {
         public override float GetHeight()
         {
-            HorizontalLineAttribute lineAttr = (HorizontalLineAttribute)attribute;
+            var lineAttr = (Attributes.Drawer.HorizontalLineAttribute)attribute;
             return EditorGUIUtility.singleLineHeight + lineAttr.Height;
         }
 
         public override void OnGUI(Rect position)
         {
-            Rect rect = EditorGUI.IndentedRect(position);
+            var rect = EditorGUI.IndentedRect(position);
             rect.y += EditorGUIUtility.singleLineHeight / 3.0f;
-            HorizontalLineAttribute lineAttr = (HorizontalLineAttribute)attribute;
+            var lineAttr = (Attributes.Drawer.HorizontalLineAttribute)attribute;
             NaughtyEditorGUI.HorizontalLine(rect, lineAttr.Height, lineAttr.Color.GetColor());
         }
     }

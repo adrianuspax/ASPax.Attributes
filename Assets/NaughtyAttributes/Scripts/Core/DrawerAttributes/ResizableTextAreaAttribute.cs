@@ -1,9 +1,7 @@
 ﻿using System;
 
-namespace NaughtyAttributes
+namespace ASPax.Attributes.Drawer
 {
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
-    public class ResizableTextAreaAttribute : DrawerAttribute
-    {
-    }
+    public class ResizableTextAreaAttribute : DrawerAttribute { }
 }

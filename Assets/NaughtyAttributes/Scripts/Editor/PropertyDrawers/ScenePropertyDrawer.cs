@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System;
 
-namespace NaughtyAttributes.Editor
+namespace ASPax.Editor
 {
-    [CustomPropertyDrawer(typeof(SceneAttribute))]
+    [CustomPropertyDrawer(typeof(Attributes.Drawer.SceneAttribute))]
     public class ScenePropertyDrawer : PropertyDrawerBase
     {
         private const string SceneListItem = "{0} ({1})";
@@ -16,27 +16,27 @@ namespace NaughtyAttributes.Editor
 
         protected override float GetPropertyHeight_Internal(SerializedProperty property, GUIContent label)
         {
-            bool validPropertyType = property.propertyType == SerializedPropertyType.String || property.propertyType == SerializedPropertyType.Integer;
-            bool anySceneInBuildSettings = GetScenes().Length > 0;
+            var validPropertyType = property.propertyType == SerializedPropertyType.String || property.propertyType == SerializedPropertyType.Integer;
+            var anySceneInBuildSettings = GetScenes().Length > 0;
 
-            return (validPropertyType && anySceneInBuildSettings)
-                ? GetPropertyHeight(property)
-                : GetPropertyHeight(property) + GetHelpBoxHeight();
+            return (validPropertyType && anySceneInBuildSettings) ? GetPropertyHeight(property) : GetPropertyHeight(property) + GetHelpBoxHeight();
         }
 
         protected override void OnGUI_Internal(Rect rect, SerializedProperty property, GUIContent label)
         {
             EditorGUI.BeginProperty(rect, label, property);
 
-            string[] scenes = GetScenes();
-            bool anySceneInBuildSettings = scenes.Length > 0;
+            var scenes = GetScenes();
+            var anySceneInBuildSettings = scenes.Length > 0;
+
             if (!anySceneInBuildSettings)
             {
                 DrawDefaultPropertyAndHelpBox(rect, property, BuildSettingsWarningMessage, MessageType.Warning);
                 return;
             }
 
-            string[] sceneOptions = GetSceneOptions(scenes);
+            var sceneOptions = GetSceneOptions(scenes);
+
             switch (property.propertyType)
             {
                 case SerializedPropertyType.String:
@@ -56,10 +56,7 @@ namespace NaughtyAttributes.Editor
 
         private string[] GetScenes()
         {
-            return EditorBuildSettings.scenes
-                .Where(scene => scene.enabled)
-                .Select(scene => Regex.Match(scene.path, ScenePattern).Groups[1].Value)
-                .ToArray();
+            return EditorBuildSettings.scenes.Where(scene => scene.enabled).Select(scene => Regex.Match(scene.path, ScenePattern).Groups[1].Value).ToArray();
         }
 
         private string[] GetSceneOptions(string[] scenes)
@@ -69,25 +66,21 @@ namespace NaughtyAttributes.Editor
 
         private static void DrawPropertyForString(Rect rect, SerializedProperty property, GUIContent label, string[] scenes, string[] sceneOptions)
         {
-            int index = IndexOf(scenes, property.stringValue);
-            int newIndex = EditorGUI.Popup(rect, label.text, index, sceneOptions);
-            string newScene = scenes[newIndex];
+            var index = IndexOf(scenes, property.stringValue);
+            var newIndex = EditorGUI.Popup(rect, label.text, index, sceneOptions);
+            var newScene = scenes[newIndex];
 
             if (!property.stringValue.Equals(newScene, StringComparison.Ordinal))
-            {
                 property.stringValue = scenes[newIndex];
-            }
         }
 
         private static void DrawPropertyForInt(Rect rect, SerializedProperty property, GUIContent label, string[] sceneOptions)
         {
-            int index = property.intValue;
-            int newIndex = EditorGUI.Popup(rect, label.text, index, sceneOptions);
+            var index = property.intValue;
+            var newIndex = EditorGUI.Popup(rect, label.text, index, sceneOptions);
 
             if (property.intValue != newIndex)
-            {
                 property.intValue = newIndex;
-            }
         }
 
         private static int IndexOf(string[] scenes, string scene)

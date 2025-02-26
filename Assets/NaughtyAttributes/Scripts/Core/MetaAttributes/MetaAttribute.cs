@@ -1,8 +1,6 @@
 ﻿using System;
 
-namespace NaughtyAttributes
+namespace ASPax.Attributes.Meta
 {
-    public class MetaAttribute : Attribute, INaughtyAttribute
-    {
-    }
+    public class MetaAttribute : Attribute, Utility.INaughtyAttribute { }
 }

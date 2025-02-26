@@ -1,8 +1,6 @@
 ﻿using System;
 
-namespace NaughtyAttributes
+namespace ASPax.Attributes.Validator
 {
-    public class ValidatorAttribute : Attribute, INaughtyAttribute
-    {
-    }
+    public class ValidatorAttribute : Attribute, Utility.INaughtyAttribute { }
 }

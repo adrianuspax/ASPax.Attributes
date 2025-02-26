@@ -1,9 +1,7 @@
 ﻿using System;
 
-namespace NaughtyAttributes
+namespace ASPax.Attributes.Drawer
 {
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
-    public class InputAxisAttribute : DrawerAttribute
-    {
-    }
+    public class InputAxisAttribute : DrawerAttribute { }
 }

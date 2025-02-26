@@ -1,10 +1,7 @@
 ﻿using System;
 
-namespace NaughtyAttributes
+namespace ASPax.Attributes.Meta
 {
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
-    public class ReadOnlyAttribute : MetaAttribute
-    {
-
-    }
+    public class ReadOnlyAttribute : MetaAttribute { }
 }

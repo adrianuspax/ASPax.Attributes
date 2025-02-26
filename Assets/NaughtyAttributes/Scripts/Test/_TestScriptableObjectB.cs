@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
-using System.Collections.Generic;
 
-namespace NaughtyAttributes.Test
+namespace ASPax.Test
 {
+    using ASPax.Attributes.Drawer;
+
     //[CreateAssetMenu(fileName = "TestScriptableObjectB", menuName = "NaughtyAttributes/TestScriptableObjectB")]
     public class _TestScriptableObjectB : ScriptableObject
     {

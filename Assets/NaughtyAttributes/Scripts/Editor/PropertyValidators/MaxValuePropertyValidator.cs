@@ -1,27 +1,25 @@
-﻿using UnityEngine;
-using UnityEditor;
+﻿using UnityEditor;
+using UnityEngine;
 
-namespace NaughtyAttributes.Editor
+namespace ASPax.Editor
 {
+    using ASPax.Attributes.Validator;
+
     public class MaxValuePropertyValidator : PropertyValidatorBase
     {
         public override void ValidateProperty(SerializedProperty property)
         {
-            MaxValueAttribute maxValueAttribute = PropertyUtility.GetAttribute<MaxValueAttribute>(property);
+            var maxValueAttribute = PropertyUtility.GetAttribute<MaxValueAttribute>(property);
 
             if (property.propertyType == SerializedPropertyType.Integer)
             {
                 if (property.intValue > maxValueAttribute.MaxValue)
-                {
                     property.intValue = (int)maxValueAttribute.MaxValue;
-                }
             }
             else if (property.propertyType == SerializedPropertyType.Float)
             {
                 if (property.floatValue > maxValueAttribute.MaxValue)
-                {
                     property.floatValue = maxValueAttribute.MaxValue;
-                }
             }
             else if (property.propertyType == SerializedPropertyType.Vector2)
             {
@@ -45,7 +43,7 @@ namespace NaughtyAttributes.Editor
             }
             else
             {
-                string warning = maxValueAttribute.GetType().Name + " can be used only on int, float, Vector or VectorInt fields";
+                var warning = maxValueAttribute.GetType().Name + " can be used only on int, float, Vector or VectorInt fields";
                 Debug.LogWarning(warning, property.serializedObject.targetObject);
             }
         }

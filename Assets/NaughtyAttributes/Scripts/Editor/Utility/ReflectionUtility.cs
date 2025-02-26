@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using UnityEngine;
 
-namespace NaughtyAttributes.Editor
+namespace ASPax.Editor
 {
     public static class ReflectionUtility
     {
@@ -16,18 +16,14 @@ namespace NaughtyAttributes.Editor
                 yield break;
             }
 
-            List<Type> types = GetSelfAndBaseTypes(target);
+            var types = GetSelfAndBaseTypes(target);
 
-            for (int i = types.Count - 1; i >= 0; i--)
+            for (var i = types.Count - 1; i >= 0; i--)
             {
-                IEnumerable<FieldInfo> fieldInfos = types[i]
-                    .GetFields(BindingFlags.Instance | BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.DeclaredOnly)
-                    .Where(predicate);
+                var fieldInfos = types[i].GetFields(BindingFlags.Instance | BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.DeclaredOnly).Where(predicate);
 
                 foreach (var fieldInfo in fieldInfos)
-                {
                     yield return fieldInfo;
-                }
             }
         }
 
@@ -39,18 +35,14 @@ namespace NaughtyAttributes.Editor
                 yield break;
             }
 
-            List<Type> types = GetSelfAndBaseTypes(target);
+            var types = GetSelfAndBaseTypes(target);
 
             for (int i = types.Count - 1; i >= 0; i--)
             {
-                IEnumerable<PropertyInfo> propertyInfos = types[i]
-                    .GetProperties(BindingFlags.Instance | BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.DeclaredOnly)
-                    .Where(predicate);
+                IEnumerable<PropertyInfo> propertyInfos = types[i].GetProperties(BindingFlags.Instance | BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.DeclaredOnly).Where(predicate);
 
                 foreach (var propertyInfo in propertyInfos)
-                {
                     yield return propertyInfo;
-                }
             }
         }
 
@@ -62,18 +54,14 @@ namespace NaughtyAttributes.Editor
                 yield break;
             }
 
-            List<Type> types = GetSelfAndBaseTypes(target);
+            var types = GetSelfAndBaseTypes(target);
 
-            for (int i = types.Count - 1; i >= 0; i--)
+            for (var i = types.Count - 1; i >= 0; i--)
             {
-                IEnumerable<MethodInfo> methodInfos = types[i]
-                    .GetMethods(BindingFlags.Instance | BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.DeclaredOnly)
-                    .Where(predicate);
+                IEnumerable<MethodInfo> methodInfos = types[i].GetMethods(BindingFlags.Instance | BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.DeclaredOnly).Where(predicate);
 
                 foreach (var methodInfo in methodInfos)
-                {
                     yield return methodInfo;
-                }
             }
         }
 
@@ -95,32 +83,20 @@ namespace NaughtyAttributes.Editor
         public static Type GetListElementType(Type listType)
         {
             if (listType.IsGenericType)
-            {
                 return listType.GetGenericArguments()[0];
-            }
             else
-            {
                 return listType.GetElementType();
-            }
         }
-
         /// <summary>
-        ///		Get type and all base types of target, sorted as following:
-        ///		<para />[target's type, base type, base's base type, ...]
+        /// Get type and all base types of target, sorted as following:
+        /// <para/>[target's type, base type, base's base type, ...]
         /// </summary>
-        /// <param name="target"></param>
-        /// <returns></returns>
         private static List<Type> GetSelfAndBaseTypes(object target)
         {
-            List<Type> types = new List<Type>()
-            {
-                target.GetType()
-            };
+            var types = new List<Type>() { target.GetType() };
 
             while (types.Last().BaseType != null)
-            {
                 types.Add(types.Last().BaseType);
-            }
 
             return types;
         }

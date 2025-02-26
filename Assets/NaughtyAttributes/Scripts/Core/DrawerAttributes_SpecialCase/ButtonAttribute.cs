@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NaughtyAttributes
+namespace ASPax.Attributes.Drawer.SpecialCases
 {
     public enum EButtonEnableMode
     {
@@ -21,13 +21,16 @@ namespace NaughtyAttributes
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
     public class ButtonAttribute : SpecialCaseDrawerAttribute
     {
-        public string Text { get; private set; }
-        public EButtonEnableMode SelectedEnableMode { get; private set; }
+        private readonly string text;
+        private readonly EButtonEnableMode selectedEnableMode;
 
         public ButtonAttribute(string text = null, EButtonEnableMode enabledMode = EButtonEnableMode.Always)
         {
-            this.Text = text;
-            this.SelectedEnableMode = enabledMode;
+            this.text = text;
+            selectedEnableMode = enabledMode;
         }
+
+        public string Text => text;
+        public EButtonEnableMode SelectedEnableMode => selectedEnableMode;
     }
 }

@@ -4,17 +4,22 @@ using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 
-namespace NaughtyAttributes.Editor
+namespace ASPax.Editor
 {
+    using ASPax.Attributes.Drawer;
+    using ASPax.Attributes.Drawer.SpecialCases;
+    using ASPax.Attributes.Meta;
+    using ASPax.Attributes.Utility;
+
     [CanEditMultipleObjects]
-    [CustomEditor(typeof(UnityEngine.Object), true)]
+    [CustomEditor(typeof(Object), true)]
     public class NaughtyInspector : UnityEditor.Editor
     {
-        private List<SerializedProperty> _serializedProperties = new List<SerializedProperty>();
+        private List<SerializedProperty> _serializedProperties = new();
         private IEnumerable<FieldInfo> _nonSerializedFields;
         private IEnumerable<PropertyInfo> _nativeProperties;
         private IEnumerable<MethodInfo> _methods;
-        private Dictionary<string, SavedBool> _foldouts = new Dictionary<string, SavedBool>();
+        private readonly Dictionary<string, SavedBool> _foldouts = new();
 
         protected virtual void OnEnable()
         {
@@ -55,16 +60,14 @@ namespace NaughtyAttributes.Editor
         protected void GetSerializedProperties(ref List<SerializedProperty> outSerializedProperties)
         {
             outSerializedProperties.Clear();
-            using (var iterator = serializedObject.GetIterator())
+            using var iterator = serializedObject.GetIterator();
+            if (iterator.NextVisible(true))
             {
-                if (iterator.NextVisible(true))
+                do
                 {
-                    do
-                    {
-                        outSerializedProperties.Add(serializedObject.FindProperty(iterator.name));
-                    }
-                    while (iterator.NextVisible(false));
+                    outSerializedProperties.Add(serializedObject.FindProperty(iterator.name));
                 }
+                while (iterator.NextVisible(false));
             }
         }
 

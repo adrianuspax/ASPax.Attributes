@@ -2,20 +2,17 @@
 using UnityEditor;
 using System;
 
-namespace NaughtyAttributes.Editor
+namespace ASPax.Editor
 {
-    [CustomPropertyDrawer(typeof(LayerAttribute))]
+    [CustomPropertyDrawer(typeof(Attributes.Drawer.LayerAttribute))]
     public class LayerPropertyDrawer : PropertyDrawerBase
     {
         private const string TypeWarningMessage = "{0} must be an int or a string";
 
         protected override float GetPropertyHeight_Internal(SerializedProperty property, GUIContent label)
         {
-            bool validPropertyType = property.propertyType == SerializedPropertyType.String || property.propertyType == SerializedPropertyType.Integer;
-
-            return validPropertyType
-                ? GetPropertyHeight(property)
-                : GetPropertyHeight(property) + GetHelpBoxHeight();
+            var validPropertyType = property.propertyType == SerializedPropertyType.String || property.propertyType == SerializedPropertyType.Integer;
+            return validPropertyType ? GetPropertyHeight(property) : GetPropertyHeight(property) + GetHelpBoxHeight();
         }
 
         protected override void OnGUI_Internal(Rect rect, SerializedProperty property, GUIContent label)
@@ -46,21 +43,19 @@ namespace NaughtyAttributes.Editor
 
         private static void DrawPropertyForString(Rect rect, SerializedProperty property, GUIContent label, string[] layers)
         {
-            int index = IndexOf(layers, property.stringValue);
-            int newIndex = EditorGUI.Popup(rect, label.text, index, layers);
-            string newLayer = layers[newIndex];
+            var index = IndexOf(layers, property.stringValue);
+            var newIndex = EditorGUI.Popup(rect, label.text, index, layers);
+            var newLayer = layers[newIndex];
 
             if (!property.stringValue.Equals(newLayer, StringComparison.Ordinal))
-            {
                 property.stringValue = layers[newIndex];
-            }
         }
 
         private static void DrawPropertyForInt(Rect rect, SerializedProperty property, GUIContent label, string[] layers)
         {
-            int index = 0;
-            string layerName = LayerMask.LayerToName(property.intValue);
-            for (int i = 0; i < layers.Length; i++)
+            var index = 0;
+            var layerName = LayerMask.LayerToName(property.intValue);
+            for (var i = 0; i < layers.Length; i++)
             {
                 if (layerName.Equals(layers[i], StringComparison.Ordinal))
                 {
@@ -69,14 +64,12 @@ namespace NaughtyAttributes.Editor
                 }
             }
 
-            int newIndex = EditorGUI.Popup(rect, label.text, index, layers);
-            string newLayerName = layers[newIndex];
-            int newLayerNumber = LayerMask.NameToLayer(newLayerName);
+            var newIndex = EditorGUI.Popup(rect, label.text, index, layers);
+            var newLayerName = layers[newIndex];
+            var newLayerNumber = LayerMask.NameToLayer(newLayerName);
 
             if (property.intValue != newLayerNumber)
-            {
                 property.intValue = newLayerNumber;
-            }
         }
 
         private static int IndexOf(string[] layers, string layer)

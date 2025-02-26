@@ -1,7 +1,10 @@
 using UnityEngine;
 
-namespace NaughtyAttributes.Test
+namespace ASPax.Test
 {
+    using ASPax.Attributes.Drawer;
+    using ASPax.Attributes.Utility;
+
     public class ProgressBarTest : MonoBehaviour
     {
         [Header("Constant ProgressBar")]

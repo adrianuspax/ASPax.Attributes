@@ -1,7 +1,11 @@
+using System;
 using UnityEngine;
 
-namespace NaughtyAttributes.Test
+namespace ASPax.Test
 {
+    using ASPax.Attributes.Drawer;
+    using ASPax.Attributes.Meta;
+
     public class OnValueChangedTest : MonoBehaviour
     {
         [OnValueChanged("OnValueChangedMethod1")]
@@ -21,7 +25,7 @@ namespace NaughtyAttributes.Test
         public OnValueChangedNest1 nest1;
     }
 
-    [System.Serializable]
+    [Serializable]
     public class OnValueChangedNest1
     {
         [OnValueChanged("OnValueChangedMethod")]
@@ -36,7 +40,7 @@ namespace NaughtyAttributes.Test
         public OnValueChangedNest2 nest2;
     }
 
-    [System.Serializable]
+    [Serializable]
     public class OnValueChangedNest2
     {
         [OnValueChanged("OnValueChangedMethod")]

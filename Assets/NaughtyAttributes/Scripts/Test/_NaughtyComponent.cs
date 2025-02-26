@@ -1,19 +1,12 @@
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace NaughtyAttributes.Test
+namespace ASPax.Test
 {
-    public class _NaughtyComponent : MonoBehaviour
-    {
-    }
+    public class _NaughtyComponent : MonoBehaviour { }
 
     [System.Serializable]
-    public class MyClass
-    {
-    }
+    public class MyClass { }
 
     [System.Serializable]
-    public struct MyStruct
-    {
-    }
+    public struct MyStruct { }
 }

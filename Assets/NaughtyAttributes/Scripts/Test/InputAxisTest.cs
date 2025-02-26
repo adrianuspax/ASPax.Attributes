@@ -1,7 +1,11 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
-namespace NaughtyAttributes.Test
+namespace ASPax.Test
 {
+    using ASPax.Attributes.Drawer;
+    using ASPax.Attributes.Drawer.SpecialCases;
+
     public class InputAxisTest : MonoBehaviour
     {
         [InputAxis]
@@ -16,7 +20,7 @@ namespace NaughtyAttributes.Test
         }
     }
 
-    [System.Serializable]
+    [Serializable]
     public class InputAxisNest1
     {
         [InputAxis]
@@ -25,7 +29,7 @@ namespace NaughtyAttributes.Test
         public InputAxisNest2 nest2;
     }
 
-    [System.Serializable]
+    [Serializable]
     public struct InputAxisNest2
     {
         [InputAxis]
