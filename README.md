@@ -12,7 +12,7 @@
 > - [Buy Me A Coffee](https://www.buymeacoffee.com/dbrizov)
 ---
 [![Unity 2019.4+](https://img.shields.io/badge/unity-2019.4%2B-blue.svg)](https://unity3d.com/get-unity/download)
-[![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://github.com/dbrizov/NaughtyAttributes/blob/master/LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://github.com/adrianuspax/ASPax.Attributes/blob/Modifyed/LICENSE)
 
 ASPax Attributes é uma extensão para o Unity Inspector.
 
