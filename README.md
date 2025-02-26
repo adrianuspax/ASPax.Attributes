@@ -29,7 +29,7 @@ No entanto, se quiser que todos os atributos funcionem em seus editores personal
 Unity **2019.4** ou versões superiores. Não se esqueça de incluir o namespace ASPax.Attributes.
 
 ## Instalação
-???
+Use o link https://github.com/adrianuspax/ASPax.Attributes
 
 # Visão geral
 
