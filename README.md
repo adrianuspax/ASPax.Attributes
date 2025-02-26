@@ -1,48 +1,42 @@
-# NaughtyAttributes
+# ASPax Attributes
+> ## Este é um fork do repositório https://github.com/dbrizov/NaughtyAttributes
+> ### Para mais informações do repositório original acesse:
+> ## Documentation
+> - [Documentation](https://dbrizov.github.io/na-docs/)
+> - [Documentation Repo](https://github.com/dbrizov/na-docs)
+> ### Se puder, ajude o desenvolvedor do repositório original com um cafezinho:
+> ## Support
+> NaughtyAttributes is an open-source project that I am developing in my free time. If you like it you can support me by donating.
+> 
+> - [PayPal](https://paypal.me/dbrizov)
+> - [Buy Me A Coffee](https://www.buymeacoffee.com/dbrizov)
+---
 [![Unity 2019.4+](https://img.shields.io/badge/unity-2019.4%2B-blue.svg)](https://unity3d.com/get-unity/download)
-[![openupm](https://img.shields.io/npm/v/com.dbrizov.naughtyattributes?label=openupm&registry_uri=https://package.openupm.com)](https://openupm.com/packages/com.dbrizov.naughtyattributes/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://github.com/dbrizov/NaughtyAttributes/blob/master/LICENSE)
 
-NaughtyAttributes is an extension for the Unity Inspector.
+ASPax Attributes é uma extensão para o Unity Inspector.
 
-It expands the range of attributes that Unity provides so that you can create powerful inspectors without the need of custom editors or property drawers. It also provides attributes that can be applied to non-serialized fields or functions.
+Isso expande a gama de atributos que o Unity fornece para que você possa criar elementos no inspetor poderosos sem a necessidade de editores personalizados ou drawers de propriedade. Ele também fornece atributos que podem ser aplicados a campos ou funções não serializados.
 
-Most of the attributes are implemented using Unity's `CustomPropertyDrawer`, so they will work in your custom editors.
-The attributes that won't work in your custom editors are the meta attributes and some drawer attributes such as
-`ReorderableList`, `Button`, `ShowNonSerializedField` and `ShowNativeProperty`.    
-If you want all of the attributes to work in your custom editors, however, you must inherit from `NaughtyInspector` and use the `NaughtyEditorGUI.PropertyField_Layout` function instead of `EditorGUILayout.PropertyField`.
+A maioria dos atributos são implementados usando `CustomPropertyDrawer` do Unity, então eles funcionarão em seus editores personalizados.
 
-## System Requirements
-Unity **2019.4** or later versions. Don't forget to include the NaughtyAttributes namespace.
+Os atributos que não funcionarão em seus editores personalizados são os metaatributos e alguns atributos drawers, como
+`ReorderableList`, `Button`, `ShowNonSerializedField` e `ShowNativeProperty`.
 
-## Installation
-1. The package is available on the [openupm registry](https://openupm.com). You can install it via [openupm-cli](https://github.com/openupm/openupm-cli).
-```
-openupm add com.dbrizov.naughtyattributes
-```
-2. You can also install via git url by adding this entry in your **manifest.json**
-```
-"com.dbrizov.naughtyattributes": "https://github.com/dbrizov/NaughtyAttributes.git#upm"
-```
-3. You can also download it from the [Asset Store](https://assetstore.unity.com/packages/tools/utilities/naughtyattributes-129996)
+No entanto, se quiser que todos os atributos funcionem em seus editores personalizados, você deve herdar de `NaughtyInspector` e usar a função `NaughtyEditorGUI.PropertyField_Layout` em vez de `EditorGUILayout.PropertyField`.
 
-## Documentation
-- [Documentation](https://dbrizov.github.io/na-docs/)
-- [Documentation Repo](https://github.com/dbrizov/na-docs)
+## Requirementos
+Unity **2019.4** ou versões superiores. Não se esqueça de incluir o namespace ASPax.Attributes.
 
-## Support
-NaughtyAttributes is an open-source project that I am developing in my free time. If you like it you can support me by donating.
+## Instalação
+???
 
-- [PayPal](https://paypal.me/dbrizov)
-- [Buy Me A Coffee](https://www.buymeacoffee.com/dbrizov)
-
-# Overview
+# Visão geral
 
 ## Special Attributes
 
 ### AllowNesting
-This attribute must be used in some cases when you want meta attributes to work inside serializable nested structs or classes.
-You can check in which cases you need to use it [here](https://dbrizov.github.io/na-docs/attributes/special_attributes/allow_nesting.html).
+Este atributo deve ser usado em alguns casos quando você deseja que metaatributos funcionem dentro de classes ou estruturas aninhadas serializáveis.
 
 ```csharp
 public class NaughtyComponent : MonoBehaviour
@@ -62,11 +56,11 @@ public struct MyStruct
 ```
 
 ## Drawer Attributes
-Provide special draw options to serialized fields.
-A field can have only one DrawerAttribute. If a field has more than one, only the bottom one will be used.
+Forneça opções especiais de desenho para campos serializados.
+> Obs. Um campo pode ter apenas um DrawerAttribute. Se um campo tiver mais de um, apenas o inferior será usado.
 
 ### AnimatorParam
-Select an Animator paramater via dropdown interface.
+Selecione um parâmetro do Animator na interface suspensa.
 
 ```csharp
 public class NaughtyComponent : MonoBehaviour
@@ -84,8 +78,8 @@ public class NaughtyComponent : MonoBehaviour
 ![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/AnimatorParam_Inspector.png)
 
 ### Button
-A method can be marked as a button. A button appears in the inspector and executes the method if clicked.
-Works both with instance and static methods.
+Um método pode ser marcado como um botão. Um botão aparece no inspetor e executa o método se clicado.
+Funciona tanto com métodos de instância quanto estáticos.
 
 ```csharp
 public class NaughtyComponent : MonoBehaviour
@@ -101,7 +95,7 @@ public class NaughtyComponent : MonoBehaviour
 ![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/Button_Inspector.png)
 
 ### CurveRange
-Set bounds and modify curve color for AnimationCurves
+Defina limites e modifique a cor da curva para AnimationCurves
 
 ```csharp
 public class NaughtyComponent : MonoBehaviour
@@ -120,7 +114,7 @@ public class NaughtyComponent : MonoBehaviour
 ![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/CurveRange_Inspector.png)
 
 ### Dropdown
-Provides an interface for dropdown value selection.
+Fornece uma interface para seleção de valores suspensos.
 
 ```csharp
 public class NaughtyComponent : MonoBehaviour
@@ -156,7 +150,7 @@ public class NaughtyComponent : MonoBehaviour
 ![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/Dropdown_Inspector.gif)
 
 ### EnumFlags
-Provides dropdown interface for setting enum flags.
+Fornece interface suspensa para definir sinalizadores de enumeração.
 
 ```csharp
 public enum Direction
@@ -178,7 +172,7 @@ public class NaughtyComponent : MonoBehaviour
 ![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/EnumFlags_Inspector.png)
 
 ### Expandable
-Make scriptable objects expandable.
+Torne objetos programáveis ​​expansíveis.
 
 ```csharp
 public class NaughtyComponent : MonoBehaviour
@@ -191,6 +185,7 @@ public class NaughtyComponent : MonoBehaviour
 ![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/Expandable_Inspector.png)
 
 ### HorizontalLine
+Linhas horizontais para inspector.
 
 ```csharp
 public class NaughtyComponent : MonoBehaviour
@@ -209,7 +204,7 @@ public class NaughtyComponent : MonoBehaviour
 ![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/HorizontalLine_Inspector.png)
 
 ### InfoBox
-Used for providing additional information.
+Usado para fornecer informações adicionais.
 
 ```csharp
 public class NaughtyComponent : MonoBehaviour
@@ -228,7 +223,7 @@ public class NaughtyComponent : MonoBehaviour
 ![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/InfoBox_Inspector.png)
 
 ### InputAxis
-Select an input axis via dropdown interface.
+Selecione um eixo de entrada por meio da interface suspensa.
 
 ```csharp
 public class NaughtyComponent : MonoBehaviour
@@ -241,7 +236,7 @@ public class NaughtyComponent : MonoBehaviour
 ![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/InputAxis_Inspector.png)
 
 ### Layer
-Select a layer via dropdown interface.
+Selecione uma camada na interface suspensa.
 
 ```csharp
 public class NaughtyComponent : MonoBehaviour
@@ -257,7 +252,7 @@ public class NaughtyComponent : MonoBehaviour
 ![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/Layer_Inspector.png)
 
 ### MinMaxSlider
-A double slider. The **min value** is saved to the **X** property, and the **max value** is saved to the **Y** property of a **Vector2** field.
+Um controle deslizante duplo. O **valor min** é salvo na propriedade **X**, e o **valor max** é salvo na propriedade **Y** de um campo **Vector2**.
 
 ```csharp
 public class NaughtyComponent : MonoBehaviour
@@ -270,6 +265,7 @@ public class NaughtyComponent : MonoBehaviour
 ![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/MinMaxSlider_Inspector.png)
 
 ### ProgressBar
+Barra de progresso.
 ```csharp
 public class NaughtyComponent : MonoBehaviour
 {
@@ -287,7 +283,7 @@ public class NaughtyComponent : MonoBehaviour
 ![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/ProgressBar_Inspector.png)
 
 ### ReorderableList
-Provides array type fields with an interface for easy reordering of elements.
+Fornece campos do tipo matriz com uma interface para fácil reordenação de elementos.
 
 ```csharp
 public class NaughtyComponent : MonoBehaviour
@@ -303,8 +299,8 @@ public class NaughtyComponent : MonoBehaviour
 ![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/ReorderableList_Inspector.gif)
 
 ### ResizableTextArea
-A resizable text area where you can see the whole text.
-Unlike Unity's **Multiline** and **TextArea** attributes where you can see only 3 rows of a given text, and in order to see it or modify it you have to manually scroll down to the desired row.
+Uma área de texto redimensionável onde você pode ver o texto inteiro.
+Ao contrário dos atributos **Multiline** e **TextArea** do Unity, onde você pode ver apenas 3 linhas de um texto dado, e para vê-lo ou modificá-lo você tem que rolar manualmente para baixo até a linha desejada.
 
 ```csharp
 public class NaughtyComponent : MonoBehaviour
@@ -317,7 +313,7 @@ public class NaughtyComponent : MonoBehaviour
 ![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/ResizableTextArea_Inspector.gif)
 
 ### Scene
-Select a scene from the build settings via dropdown interface.
+Selecione uma cena nas configurações de construção por meio da interface suspensa.
 
 ```csharp
 public class NaughtyComponent : MonoBehaviour
@@ -333,7 +329,7 @@ public class NaughtyComponent : MonoBehaviour
 ![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/Scene_Inspector.png)
 
 ### ShowAssetPreview
-Shows the texture preview of a given asset (Sprite, Prefab...).
+Mostra a pré-visualização da textura de um determinado ativo (Sprite, Prefab...).
 
 ```csharp
 public class NaughtyComponent : MonoBehaviour
@@ -349,9 +345,9 @@ public class NaughtyComponent : MonoBehaviour
 ![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/ShowAssetPreview_Inspector.png)
 
 ### ShowNativeProperty
-Shows native C# properties in the inspector.
-All native properties are displayed at the bottom of the inspector after the non-serialized fields and before the method buttons.
-It supports only certain types **(bool, int, long, float, double, string, Vector2, Vector3, Vector4, Color, Bounds, Rect, UnityEngine.Object)**.
+Mostra propriedades nativas do C# no inspetor.
+Todas as propriedades nativas são exibidas na parte inferior do inspetor após os campos não serializados e antes dos botões de método.
+Ele suporta apenas certos tipos **(bool, int, long, float, double, string, Vector2, Vector3, Vector4, Color, Bounds, Rect, UnityEngine.Object)**.
 
 ```csharp
 public class NaughtyComponent : MonoBehaviour
@@ -366,11 +362,11 @@ public class NaughtyComponent : MonoBehaviour
 ![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/ShowNativeProperty_Inspector.png)
 
 ### ShowNonSerializedField
-Shows non-serialized fields in the inspector.
-All non-serialized fields are displayed at the bottom of the inspector before the method buttons.
-Keep in mind that if you change a non-static non-serialized field in the code - the value in the inspector will be updated after you press **Play** in the editor.
-There is no such issue with static non-serialized fields because their values are updated at compile time.
-It supports only certain types **(bool, int, long, float, double, string, Vector2, Vector3, Vector4, Color, Bounds, Rect, UnityEngine.Object)**.
+Mostra campos não serializados no inspector.
+Todos os campos não serializados são exibidos na parte inferior do inspector antes dos botões de método.
+Lembre-se de que se você alterar um campo não serializado não estático no código, o valor no inspetor será atualizado após você pressionar **Play** no editor.
+Não há esse problema com campos não serializados estáticos porque seus valores são atualizados em tempo de compilação.
+Ele suporta apenas certos tipos **(bool, int, long, float, double, string, Vector2, Vector3, Vector4, Color, Bounds, Rect, UnityEngine.Object)**.
 
 ```csharp
 public class NaughtyComponent : MonoBehaviour
@@ -389,7 +385,7 @@ public class NaughtyComponent : MonoBehaviour
 ![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/ShowNonSerializedField_Inspector.png)
 
 ### SortingLayer
-Select a sorting layer via dropdown interface.
+Selecione uma Sorting Layer por meio da interface suspensa.
 
 ```csharp
 public class NaughtyComponent : MonoBehaviour
@@ -405,7 +401,7 @@ public class NaughtyComponent : MonoBehaviour
 ![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/SortingLayer_Inspector.png)
 
 ### Tag
-Select a tag via dropdown interface.
+Selecione uma tag na interface suspensa.
 
 ```csharp
 public class NaughtyComponent : MonoBehaviour
@@ -418,10 +414,10 @@ public class NaughtyComponent : MonoBehaviour
 ![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/Tag_Inspector.png)
 
 ## Meta Attributes
-Give the fields meta data. A field can have more than one meta attributes.
+Dê metadados aos campos. Um campo pode ter mais de um atributo meta.
 
 ### BoxGroup
-Surrounds grouped fields with a box.
+Envolve campos agrupados com uma caixa.
 
 ```csharp
 public class NaughtyComponent : MonoBehaviour
@@ -441,7 +437,7 @@ public class NaughtyComponent : MonoBehaviour
 ![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/BoxGroup_Inspector.png)
 
 ### Foldout
-Makes a foldout group.
+Cria um grupo Fold.
 
 ```csharp
 public class NaughtyComponent : MonoBehaviour
@@ -456,6 +452,8 @@ public class NaughtyComponent : MonoBehaviour
 ![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/Foldout_Inspector.gif)
 
 ### EnableIf / DisableIf
+Habilita/Desabilita condicionalmente.
+
 ```csharp
 public class NaughtyComponent : MonoBehaviour
 {
@@ -478,7 +476,7 @@ public class NaughtyComponent : MonoBehaviour
 
 ![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/EnableIf_Inspector.gif)
 
-You can have more than one condition.
+Você pode ter mais de uma condição.
 
 ```csharp
 public class NaughtyComponent : MonoBehaviour
@@ -495,6 +493,8 @@ public class NaughtyComponent : MonoBehaviour
 ```
 
 ### ShowIf / HideIf
+Mostra/Esconde condicionalmente.
+
 ```csharp
 public class NaughtyComponent : MonoBehaviour
 {
@@ -517,7 +517,7 @@ public class NaughtyComponent : MonoBehaviour
 
 ![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/ShowIf_Inspector.gif)
 
-You can have more than one condition.
+Você pode ter mais de uma condição.
 
 ```csharp
 public class NaughtyComponent : MonoBehaviour
@@ -534,7 +534,7 @@ public class NaughtyComponent : MonoBehaviour
 ```
 
 ### Label
-Override default field label.
+Substituir rótulo de campo padrão.
 
 ```csharp
 public class NaughtyComponent : MonoBehaviour
@@ -550,9 +550,9 @@ public class NaughtyComponent : MonoBehaviour
 ![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/Label_Inspector.png)
 
 ### OnValueChanged
-Detects a value change and executes a callback.
-Keep in mind that the event is detected only when the value is changed from the inspector.
-If you want a runtime event, you should probably use an event/delegate and subscribe to it.
+Detecta uma mudança de valor e executa um retorno de chamada.
+Tenha em mente que o evento é detectado somente quando o valor é alterado do inspetor.
+Se você quiser um evento de tempo de execução, você provavelmente deve usar um event/delegate e assinar para ele.
 
 ```csharp
 public class NaughtyComponent : MonoBehaviour
@@ -568,7 +568,7 @@ public class NaughtyComponent : MonoBehaviour
 ```
 
 ### ReadOnly
-Make a field read only.
+Tornar um campo somente leitura.
 
 ```csharp
 public class NaughtyComponent : MonoBehaviour
@@ -581,10 +581,10 @@ public class NaughtyComponent : MonoBehaviour
 ![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/ReadOnly_Inspector.png)
 
 ## Validator Attributes
-Used for validating the fields. A field can have infinite number of validator attributes.
+Usado para validar os campos. Um campo pode ter um número infinito de atributos validadores.
 
 ### MinValue / MaxValue
-Clamps integer and float fields.
+Fixa campos inteiros e flutuantes.
 
 ```csharp
 public class NaughtyComponent : MonoBehaviour
@@ -600,7 +600,7 @@ public class NaughtyComponent : MonoBehaviour
 ![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/MinValueMaxValue_Inspector.gif)
 
 ### Required
-Used to remind the developer that a given reference type field is required.
+Usado para lembrar o desenvolvedor de que um determinado campo de tipo de referência é obrigatório.
 
 ```csharp
 public class NaughtyComponent : MonoBehaviour
@@ -616,7 +616,7 @@ public class NaughtyComponent : MonoBehaviour
 ![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/Required_Inspector.png)
 
 ### ValidateInput
-The most powerful ValidatorAttribute.
+O ValidatorAttribute mais poderoso.
 
 ```csharp
 public class _NaughtyComponent : MonoBehaviour
