@@ -42,7 +42,7 @@ namespace ASPax.Editor
         {
             GetSerializedProperties(ref _serializedProperties);
 
-            bool anyNaughtyAttribute = _serializedProperties.Any(p => PropertyUtility.GetAttribute<INaughtyAttribute>(p) != null);
+            bool anyNaughtyAttribute = _serializedProperties.Any(p => PropertyUtility.GetAttribute<IASPaxAttribute>(p) != null);
             if (!anyNaughtyAttribute)
             {
                 DrawDefaultInspector();
@@ -145,7 +145,7 @@ namespace ASPax.Editor
                     EditorGUILayout.Space();
                     EditorGUILayout.LabelField("Non-Serialized Fields", GetHeaderGUIStyle());
                     NaughtyEditorGUI.HorizontalLine(
-                        EditorGUILayout.GetControlRect(false), HorizontalLineAttribute.DefaultHeight, HorizontalLineAttribute.DefaultColor.GetColor());
+                        EditorGUILayout.GetControlRect(false), HorizontalLineAttribute.HEIGHT, HorizontalLineAttribute.COLOR.GetColor());
                 }
 
                 foreach (var field in _nonSerializedFields)
@@ -164,7 +164,7 @@ namespace ASPax.Editor
                     EditorGUILayout.Space();
                     EditorGUILayout.LabelField("Native Properties", GetHeaderGUIStyle());
                     NaughtyEditorGUI.HorizontalLine(
-                        EditorGUILayout.GetControlRect(false), HorizontalLineAttribute.DefaultHeight, HorizontalLineAttribute.DefaultColor.GetColor());
+                        EditorGUILayout.GetControlRect(false), HorizontalLineAttribute.HEIGHT, HorizontalLineAttribute.COLOR.GetColor());
                 }
 
                 foreach (var property in _nativeProperties)
@@ -183,7 +183,7 @@ namespace ASPax.Editor
                     EditorGUILayout.Space();
                     EditorGUILayout.LabelField("Buttons", GetHeaderGUIStyle());
                     NaughtyEditorGUI.HorizontalLine(
-                        EditorGUILayout.GetControlRect(false), HorizontalLineAttribute.DefaultHeight, HorizontalLineAttribute.DefaultColor.GetColor());
+                        EditorGUILayout.GetControlRect(false), HorizontalLineAttribute.HEIGHT, HorizontalLineAttribute.COLOR.GetColor());
                 }
 
                 foreach (var method in _methods)

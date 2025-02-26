@@ -1,9 +1,11 @@
-﻿using UnityEngine;
-using UnityEditor;
+﻿using UnityEditor;
+using UnityEngine;
 
 namespace ASPax.Editor
 {
-    [CustomPropertyDrawer(typeof(Attributes.Drawer.ShowAssetPreviewAttribute))]
+    using Attributes.Drawer;
+
+    [CustomPropertyDrawer(typeof(ShowAssetPreviewAttribute))]
     public class ShowAssetPreviewPropertyDrawer : PropertyDrawerBase
     {
         protected override float GetPropertyHeight_Internal(SerializedProperty property, GUIContent label)
@@ -89,9 +91,9 @@ namespace ASPax.Editor
             }
             else
             {
-                var targetWidth = Attributes.Drawer.ShowAssetPreviewAttribute.DefaultWidth;
-                var targetHeight = Attributes.Drawer.ShowAssetPreviewAttribute.DefaultHeight;
-                var showAssetPreviewAttribute = PropertyUtility.GetAttribute<Attributes.Drawer.ShowAssetPreviewAttribute>(property);
+                var targetWidth = ShowAssetPreviewAttribute.WIDTH;
+                var targetHeight = ShowAssetPreviewAttribute.HEIGHT;
+                var showAssetPreviewAttribute = PropertyUtility.GetAttribute<ShowAssetPreviewAttribute>(property);
 
                 if (showAssetPreviewAttribute != null)
                 {

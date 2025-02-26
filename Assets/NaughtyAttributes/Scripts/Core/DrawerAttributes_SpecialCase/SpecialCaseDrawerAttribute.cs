@@ -2,5 +2,6 @@
 
 namespace ASPax.Attributes.Drawer.SpecialCases
 {
-    public class SpecialCaseDrawerAttribute : Attribute, Utility.INaughtyAttribute { }
+    using Utility;
+    public class SpecialCaseDrawerAttribute : Attribute, IASPaxAttribute { }
 }

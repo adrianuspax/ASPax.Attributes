@@ -2,7 +2,7 @@
 
 namespace ASPax.Attributes.Drawer.SpecialCases
 {
-    public enum EButtonEnableMode
+    public enum SButtonEnableMode
     {
         /// <summary>
         /// Button should be active always
@@ -21,16 +21,16 @@ namespace ASPax.Attributes.Drawer.SpecialCases
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
     public class ButtonAttribute : SpecialCaseDrawerAttribute
     {
-        private readonly string text;
-        private readonly EButtonEnableMode selectedEnableMode;
+        private readonly string _text;
+        private readonly SButtonEnableMode _selectedEnableMode;
 
-        public ButtonAttribute(string text = null, EButtonEnableMode enabledMode = EButtonEnableMode.Always)
+        public ButtonAttribute(string text = null, SButtonEnableMode enabledMode = SButtonEnableMode.Always)
         {
-            this.text = text;
-            selectedEnableMode = enabledMode;
+            _text = text;
+            _selectedEnableMode = enabledMode;
         }
 
-        public string Text => text;
-        public EButtonEnableMode SelectedEnableMode => selectedEnableMode;
+        public string Text => _text;
+        public SButtonEnableMode SelectedEnableMode => _selectedEnableMode;
     }
 }

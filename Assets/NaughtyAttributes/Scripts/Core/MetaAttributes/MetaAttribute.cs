@@ -2,5 +2,7 @@
 
 namespace ASPax.Attributes.Meta
 {
-    public class MetaAttribute : Attribute, Utility.INaughtyAttribute { }
+    using Utility;
+
+    public class MetaAttribute : Attribute, IASPaxAttribute { }
 }

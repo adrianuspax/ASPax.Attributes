@@ -1,18 +1,20 @@
-﻿using UnityEngine;
-using UnityEditor;
+﻿using System;
 using System.Collections;
-using System.Reflection;
-using System;
 using System.Collections.Generic;
+using System.Reflection;
+using UnityEditor;
+using UnityEngine;
 
 namespace ASPax.Editor
 {
-    [CustomPropertyDrawer(typeof(Attributes.Drawer.DropdownAttribute))]
+    using Attributes.Drawer;
+
+    [CustomPropertyDrawer(typeof(DropdownAttribute))]
     public class DropdownPropertyDrawer : PropertyDrawerBase
     {
         protected override float GetPropertyHeight_Internal(SerializedProperty property, GUIContent label)
         {
-            var dropdownAttribute = (Attributes.Drawer.DropdownAttribute)attribute;
+            var dropdownAttribute = (DropdownAttribute)attribute;
             var values = GetValues(property, dropdownAttribute.ValuesName);
             var fieldInfo = ReflectionUtility.GetField(PropertyUtility.GetTargetObjectWithProperty(property), property.name);
             var propertyHeight = AreValuesValid(values, fieldInfo) ? GetPropertyHeight(property) : GetPropertyHeight(property) + GetHelpBoxHeight();
@@ -24,7 +26,7 @@ namespace ASPax.Editor
         {
             EditorGUI.BeginProperty(rect, label, property);
 
-            var dropdownAttribute = (Attributes.Drawer.DropdownAttribute)attribute;
+            var dropdownAttribute = (DropdownAttribute)attribute;
             var target = PropertyUtility.GetTargetObjectWithProperty(property);
             var valuesObject = GetValues(property, dropdownAttribute.ValuesName);
             var dropdownField = ReflectionUtility.GetField(target, property.name);
@@ -50,9 +52,9 @@ namespace ASPax.Editor
                     if (selectedValueIndex < 0)
                         selectedValueIndex = 0;
 
-                    NaughtyEditorGUI.Dropdown( rect, property.serializedObject, target, dropdownField, label.text, selectedValueIndex, values, displayOptions);
+                    NaughtyEditorGUI.Dropdown(rect, property.serializedObject, target, dropdownField, label.text, selectedValueIndex, values, displayOptions);
                 }
-                else if (valuesObject is Attributes.Drawer.IDropdownList list1)
+                else if (valuesObject is IDropdownList list1)
                 {
                     var selectedValue = dropdownField.GetValue(target); // Current value
                     var index = -1; // Current value index, values and display options
@@ -85,7 +87,7 @@ namespace ASPax.Editor
                     if (selectedValueIndex < 0)
                         selectedValueIndex = 0;
 
-                    NaughtyEditorGUI.Dropdown( rect, property.serializedObject, target, dropdownField, label.text, selectedValueIndex, values.ToArray(), displayOptions.ToArray());
+                    NaughtyEditorGUI.Dropdown(rect, property.serializedObject, target, dropdownField, label.text, selectedValueIndex, values.ToArray(), displayOptions.ToArray());
                 }
             }
             else
@@ -112,7 +114,7 @@ namespace ASPax.Editor
 
             var methodValuesInfo = ReflectionUtility.GetMethod(target, valuesName);
 
-            if (methodValuesInfo != null &&  methodValuesInfo.ReturnType != typeof(void) && methodValuesInfo.GetParameters().Length == 0)
+            if (methodValuesInfo != null && methodValuesInfo.ReturnType != typeof(void) && methodValuesInfo.GetParameters().Length == 0)
                 return methodValuesInfo.Invoke(target, null);
 
             return null;
@@ -123,7 +125,7 @@ namespace ASPax.Editor
             if (values == null || dropdownField == null)
                 return false;
 
-            if ((values is IList && dropdownField.FieldType == GetElementType(values)) || (values is Attributes.Drawer.IDropdownList))
+            if ((values is IList && dropdownField.FieldType == GetElementType(values)) || (values is IDropdownList))
                 return true;
 
             return false;

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEditor;
@@ -6,7 +7,9 @@ using UnityEngine;
 
 namespace ASPax.Editor
 {
-    [CustomPropertyDrawer(typeof(Attributes.Drawer.InputAxisAttribute))]
+    using Attributes.Drawer;
+
+    [CustomPropertyDrawer(typeof(InputAxisAttribute))]
     public class InputAxisPropertyDrawer : PropertyDrawerBase
     {
         private static readonly string AssetPath = Path.Combine("ProjectSettings", "InputManager.asset");
@@ -41,7 +44,7 @@ namespace ASPax.Editor
 
                 for (var i = 1; i < axes.Length; i++) // check if there is an entry that matches the entry and get the index // we skip index 0 as that is a special custom case
                 {
-                    if (axes[i].Equals(propertyString, System.StringComparison.Ordinal))
+                    if (axes[i].Equals(propertyString, StringComparison.Ordinal))
                     {
                         index = i;
                         break;
@@ -51,12 +54,12 @@ namespace ASPax.Editor
                 var newIndex = EditorGUI.Popup(rect, label.text, index, axes); // Draw the popup box with the current selected index
                 var newValue = newIndex > 0 ? axes[newIndex] : string.Empty; // Adjust the actual string value of the property based on the selection
 
-                if (!property.stringValue.Equals(newValue, System.StringComparison.Ordinal))
+                if (!property.stringValue.Equals(newValue, StringComparison.Ordinal))
                     property.stringValue = newValue;
             }
             else
             {
-                var message = string.Format("{0} supports only string fields", typeof(Attributes.Drawer.InputAxisAttribute).Name);
+                var message = string.Format("{0} supports only string fields", typeof(InputAxisAttribute).Name);
                 DrawDefaultPropertyAndHelpBox(rect, property, message, MessageType.Warning);
             }
 

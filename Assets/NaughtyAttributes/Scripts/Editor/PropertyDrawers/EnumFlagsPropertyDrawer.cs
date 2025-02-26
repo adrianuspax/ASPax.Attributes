@@ -1,10 +1,12 @@
-﻿using UnityEngine;
+﻿using System;
 using UnityEditor;
-using System;
+using UnityEngine;
 
 namespace ASPax.Editor
 {
-    [CustomPropertyDrawer(typeof(Attributes.Drawer.EnumFlagsAttribute))]
+    using Attributes.Drawer;
+
+    [CustomPropertyDrawer(typeof(EnumFlagsAttribute))]
     public class EnumFlagsPropertyDrawer : PropertyDrawerBase
     {
         protected override float GetPropertyHeight_Internal(SerializedProperty property, GUIContent label)

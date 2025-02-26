@@ -7,7 +7,7 @@ namespace ASPax.Test
 
     public class InfoBoxTest : MonoBehaviour
     {
-        [InfoBox("Normal", EInfoBoxType.Normal)]
+        [InfoBox("Normal", InfoBoxType.Normal)]
         public int normal;
 
         public InfoBoxNest1 nest1;
@@ -16,7 +16,7 @@ namespace ASPax.Test
     [Serializable]
     public class InfoBoxNest1
     {
-        [InfoBox("Warning", EInfoBoxType.Warning)]
+        [InfoBox("Warning", InfoBoxType.Warning)]
         public int warning;
 
         public InfoBoxNest2 nest2;
@@ -25,7 +25,7 @@ namespace ASPax.Test
     [Serializable]
     public class InfoBoxNest2
     {
-        [InfoBox("Error", EInfoBoxType.Error)]
+        [InfoBox("Error", InfoBoxType.Error)]
         public int error;
     }
 }

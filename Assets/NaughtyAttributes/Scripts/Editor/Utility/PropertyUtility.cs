@@ -7,8 +7,8 @@ using UnityEngine;
 
 namespace ASPax.Editor
 {
-    using ASPax.Attributes.Meta;
-    using ASPax.Attributes.Utility;
+    using Attributes.Meta;
+    using Attributes.Utility;
 
     public static class PropertyUtility
     {
@@ -196,11 +196,11 @@ namespace ASPax.Editor
             return conditionValues;
         }
 
-        internal static bool GetConditionsFlag(List<bool> conditionValues, EConditionOperator conditionOperator, bool invert)
+        internal static bool GetConditionsFlag(List<bool> conditionValues, UConditionOperator conditionOperator, bool invert)
         {
             bool flag;
 
-            if (conditionOperator == EConditionOperator.And)
+            if (conditionOperator == UConditionOperator.And)
             {
                 flag = true;
 

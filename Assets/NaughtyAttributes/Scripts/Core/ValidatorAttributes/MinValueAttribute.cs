@@ -5,18 +5,18 @@ namespace ASPax.Attributes.Validator
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
     public class MinValueAttribute : ValidatorAttribute
     {
-        private readonly float minValue;
+        private readonly float _minValue;
 
         public MinValueAttribute(float minValue)
         {
-            this.minValue = minValue;
+            _minValue = minValue;
         }
 
         public MinValueAttribute(int minValue)
         {
-            this.minValue = minValue;
+            _minValue = minValue;
         }
 
-        public float MinValue => minValue;
+        public float MinValue => _minValue;
     }
 }

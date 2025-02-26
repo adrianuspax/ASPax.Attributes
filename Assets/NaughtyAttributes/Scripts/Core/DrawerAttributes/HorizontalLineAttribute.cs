@@ -2,22 +2,24 @@
 
 namespace ASPax.Attributes.Drawer
 {
+    using ASPax.Attributes.Utility;
+
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = true, Inherited = true)]
     public class HorizontalLineAttribute : DrawerAttribute
     {
-        public const float DefaultHeight = 2.0f;
-        public const Utility.EColor DefaultColor = Utility.EColor.Gray;
+        public const float HEIGHT = 2.0f;
+        public const UColor COLOR = UColor.Gray;
 
-        private readonly float height;
-        private readonly Utility.EColor color;
+        private readonly float _height;
+        private readonly UColor _color;
 
-        public HorizontalLineAttribute(float height = DefaultHeight, Utility.EColor color = DefaultColor)
+        public HorizontalLineAttribute(float height = HEIGHT, UColor color = COLOR)
         {
-            this.height = height;
-            this.color = color;
+            _height = height;
+            _color = color;
         }
 
-        public float Height => height;
-        public Utility.EColor Color => color;
+        public float Height => _height;
+        public UColor Color => _color;
     }
 }

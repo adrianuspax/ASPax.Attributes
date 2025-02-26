@@ -9,19 +9,19 @@ namespace ASPax.Test
     {
         public int myInt;
 
-        [Button(enabledMode: EButtonEnableMode.Always)]
+        [Button(enabledMode: SButtonEnableMode.Always)]
         private void IncrementMyInt()
         {
             myInt++;
         }
 
-        [Button("Decrement My Int", EButtonEnableMode.Editor)]
+        [Button("Decrement My Int", SButtonEnableMode.Editor)]
         private void DecrementMyInt()
         {
             myInt--;
         }
 
-        [Button(enabledMode: EButtonEnableMode.Playmode)]
+        [Button(enabledMode: SButtonEnableMode.Playmode)]
         private void LogMyInt(string prefix = "MyInt = ")
         {
             Debug.Log(prefix + myInt);

@@ -2,7 +2,7 @@ using UnityEditor;
 
 namespace ASPax.Editor
 {
-    using ASPax.Attributes.Validator;
+    using Attributes.Validator;
 
     public class ValidateInputPropertyValidator : PropertyValidatorBase
     {

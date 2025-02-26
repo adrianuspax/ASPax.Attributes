@@ -1,11 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEditor.Animations;
 using UnityEngine;
 
 namespace ASPax.Editor
 {
-    [CustomPropertyDrawer(typeof(Attributes.Drawer.AnimatorParamAttribute))]
+    using Attributes.Drawer;
+
+    [CustomPropertyDrawer(typeof(AnimatorParamAttribute))]
     public class AnimatorParamPropertyDrawer : PropertyDrawerBase
     {
         private const string InvalidAnimatorControllerWarningMessage = "Target animator controller is null";
@@ -13,7 +16,7 @@ namespace ASPax.Editor
 
         protected override float GetPropertyHeight_Internal(SerializedProperty property, GUIContent label)
         {
-            var animatorParamAttribute = PropertyUtility.GetAttribute<Attributes.Drawer.AnimatorParamAttribute>(property);
+            var animatorParamAttribute = PropertyUtility.GetAttribute<AnimatorParamAttribute>(property);
             var validAnimatorController = GetAnimatorController(property, animatorParamAttribute.AnimatorName) != null;
             var validPropertyType = property.propertyType == SerializedPropertyType.Integer || property.propertyType == SerializedPropertyType.String;
 
@@ -24,7 +27,7 @@ namespace ASPax.Editor
         {
             EditorGUI.BeginProperty(rect, label, property);
 
-            var animatorParamAttribute = PropertyUtility.GetAttribute<Attributes.Drawer.AnimatorParamAttribute>(property);
+            var animatorParamAttribute = PropertyUtility.GetAttribute<AnimatorParamAttribute>(property);
             var animatorController = GetAnimatorController(property, animatorParamAttribute.AnimatorName);
 
             if (animatorController == null)
@@ -92,7 +95,7 @@ namespace ASPax.Editor
 
             for (int i = 0; i < animatorParameters.Count; i++)
             {
-                if (paramName.Equals(animatorParameters[i].name, System.StringComparison.Ordinal))
+                if (paramName.Equals(animatorParameters[i].name, StringComparison.Ordinal))
                 {
                     index = i + 1; // +1 because the first option is reserved for (None)
                     break;
@@ -104,7 +107,7 @@ namespace ASPax.Editor
             var newIndex = EditorGUI.Popup(rect, label.text, index, displayOptions);
             var newValue = newIndex == 0 ? null : animatorParameters[newIndex - 1].name;
 
-            if (!property.stringValue.Equals(newValue, System.StringComparison.Ordinal))
+            if (!property.stringValue.Equals(newValue, StringComparison.Ordinal))
                 property.stringValue = newValue;
         }
 

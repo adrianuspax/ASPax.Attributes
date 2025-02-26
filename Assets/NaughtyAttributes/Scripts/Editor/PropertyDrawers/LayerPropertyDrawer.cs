@@ -1,10 +1,12 @@
-﻿using UnityEngine;
+﻿using System;
 using UnityEditor;
-using System;
+using UnityEngine;
 
 namespace ASPax.Editor
 {
-    [CustomPropertyDrawer(typeof(Attributes.Drawer.LayerAttribute))]
+    using Attributes.Drawer;
+
+    [CustomPropertyDrawer(typeof(LayerAttribute))]
     public class LayerPropertyDrawer : PropertyDrawerBase
     {
         private const string TypeWarningMessage = "{0} must be an int or a string";

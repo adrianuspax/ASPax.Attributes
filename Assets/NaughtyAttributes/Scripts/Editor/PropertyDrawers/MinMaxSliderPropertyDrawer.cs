@@ -3,7 +3,9 @@ using UnityEngine;
 
 namespace ASPax.Editor
 {
-    [CustomPropertyDrawer(typeof(Attributes.Drawer.MinMaxSliderAttribute))]
+    using Attributes.Drawer;
+
+    [CustomPropertyDrawer(typeof(MinMaxSliderAttribute))]
     public class MinMaxSliderPropertyDrawer : PropertyDrawerBase
     {
         protected override float GetPropertyHeight_Internal(SerializedProperty property, GUIContent label)
@@ -15,7 +17,7 @@ namespace ASPax.Editor
         {
             EditorGUI.BeginProperty(rect, label, property);
 
-            var minMaxSliderAttribute = (Attributes.Drawer.MinMaxSliderAttribute)attribute;
+            var minMaxSliderAttribute = (MinMaxSliderAttribute)attribute;
 
             if (property.propertyType == SerializedPropertyType.Vector2 || property.propertyType == SerializedPropertyType.Vector2Int)
             {
@@ -53,10 +55,10 @@ namespace ASPax.Editor
 
                 var maxFloatFieldRect = new Rect()
                 {
-                   x = rect.x + labelWidth + floatFieldWidth + sliderWidth - indentLength,
-                   y = rect.y,
-                   width = floatFieldWidth + indentLength,
-                   height = rect.height 
+                    x = rect.x + labelWidth + floatFieldWidth + sliderWidth - indentLength,
+                    y = rect.y,
+                    width = floatFieldWidth + indentLength,
+                    height = rect.height
                 };
 
                 EditorGUI.LabelField(labelRect, label.text); // Draw the label

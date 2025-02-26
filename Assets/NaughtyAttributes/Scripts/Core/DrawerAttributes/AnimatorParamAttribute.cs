@@ -6,22 +6,22 @@ namespace ASPax.Attributes.Drawer
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
     public class AnimatorParamAttribute : DrawerAttribute
     {
-        private readonly string animatorName;
-        private readonly AnimatorControllerParameterType? animatorParamType;
+        private readonly string _animatorName;
+        private readonly AnimatorControllerParameterType? _animatorParamType;
 
         public AnimatorParamAttribute(string animatorName)
         {
-            this.animatorName = animatorName;
-            animatorParamType = null;
+            _animatorName = animatorName;
+            _animatorParamType = null;
         }
 
         public AnimatorParamAttribute(string animatorName, AnimatorControllerParameterType animatorParamType)
         {
-            this.animatorName = animatorName;
-            this.animatorParamType = animatorParamType;
+            _animatorName = animatorName;
+            _animatorParamType = animatorParamType;
         }
 
-        public string AnimatorName => animatorName;
-        public AnimatorControllerParameterType? AnimatorParamType => animatorParamType;
+        public string AnimatorName => _animatorName;
+        public AnimatorControllerParameterType? AnimatorParamType => _animatorParamType;
     }
 }

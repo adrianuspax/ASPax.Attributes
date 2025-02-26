@@ -8,8 +8,8 @@ using UnityEngine;
 
 namespace ASPax.Editor
 {
-    using ASPax.Attributes.Drawer.SpecialCases;
-    using ASPax.Attributes.Validator;
+    using Attributes.Drawer.SpecialCases;
+    using Attributes.Validator;
 
     public static class NaughtyEditorGUI
     {
@@ -131,7 +131,7 @@ namespace ASPax.Editor
                 var buttonEnabled = ButtonUtility.IsEnabled(target, methodInfo);
                 var mode = buttonAttribute.SelectedEnableMode;
 
-                buttonEnabled &= mode == EButtonEnableMode.Always || mode == EButtonEnableMode.Editor && !Application.isPlaying || mode == EButtonEnableMode.Playmode && Application.isPlaying;
+                buttonEnabled &= mode == SButtonEnableMode.Always || mode == SButtonEnableMode.Editor && !Application.isPlaying || mode == SButtonEnableMode.Playmode && Application.isPlaying;
 
                 var methodIsCoroutine = methodInfo.ReturnType == typeof(IEnumerator);
 

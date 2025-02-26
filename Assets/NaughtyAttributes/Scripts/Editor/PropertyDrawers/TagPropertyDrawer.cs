@@ -1,10 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
 namespace ASPax.Editor
 {
-    [CustomPropertyDrawer(typeof(Attributes.Drawer.TagAttribute))]
+    using Attributes.Drawer;
+
+    [CustomPropertyDrawer(typeof(TagAttribute))]
     public class TagPropertyDrawer : PropertyDrawerBase
     {
         protected override float GetPropertyHeight_Internal(SerializedProperty property, GUIContent label)
@@ -31,7 +34,7 @@ namespace ASPax.Editor
 
                 for (var i = 1; i < tagList.Count; i++) // check if there is an entry that matches the entry and get the index // we skip index 0 as that is a special custom case
                 {
-                    if (tagList[i].Equals(propertyString, System.StringComparison.Ordinal))
+                    if (tagList[i].Equals(propertyString, StringComparison.Ordinal))
                     {
                         index = i;
                         break;
@@ -41,12 +44,12 @@ namespace ASPax.Editor
                 var newIndex = EditorGUI.Popup(rect, label.text, index, tagList.ToArray()); // Draw the popup box with the current selected index
                 var newValue = newIndex > 0 ? tagList[newIndex] : string.Empty; // Adjust the actual string value of the property based on the selection
 
-                if (!property.stringValue.Equals(newValue, System.StringComparison.Ordinal))
+                if (!property.stringValue.Equals(newValue, StringComparison.Ordinal))
                     property.stringValue = newValue;
             }
             else
             {
-                var message = string.Format("{0} supports only string fields", typeof(Attributes.Drawer.TagAttribute).Name);
+                var message = string.Format("{0} supports only string fields", typeof(TagAttribute).Name);
                 DrawDefaultPropertyAndHelpBox(rect, property, message, MessageType.Warning);
             }
 

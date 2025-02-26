@@ -60,7 +60,7 @@ namespace ASPax.Editor
             EditorGUI.EndProperty();
         }
 
-        private object GetMaxValue(SerializedProperty property, Attributes.Drawer.ProgressBarAttribute progressBarAttribute)
+        private object GetMaxValue(SerializedProperty property, ProgressBarAttribute progressBarAttribute)
         {
             if (string.IsNullOrEmpty(progressBarAttribute.MaxValueName))
             {

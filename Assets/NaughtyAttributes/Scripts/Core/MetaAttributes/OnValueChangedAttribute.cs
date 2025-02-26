@@ -5,13 +5,13 @@ namespace ASPax.Attributes.Meta
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = true, Inherited = true)]
     public class OnValueChangedAttribute : MetaAttribute
     {
-        private readonly string callbackName;
+        private readonly string _callbackName;
 
         public OnValueChangedAttribute(string callbackName)
         {
-            this.callbackName = callbackName;
+            _callbackName = callbackName;
         }
 
-        public string CallbackName => callbackName;
+        public string CallbackName => _callbackName;
     }
 }

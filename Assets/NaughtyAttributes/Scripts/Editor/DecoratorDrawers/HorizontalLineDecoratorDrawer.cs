@@ -1,16 +1,17 @@
-﻿using UnityEngine;
-using UnityEditor;
+﻿using UnityEditor;
+using UnityEngine;
 
 namespace ASPax.Editor
 {
-    using ASPax.Attributes.Utility;
+    using Attributes.Drawer;
+    using Attributes.Utility;
 
-    [CustomPropertyDrawer(typeof(Attributes.Drawer.HorizontalLineAttribute))]
+    [CustomPropertyDrawer(typeof(HorizontalLineAttribute))]
     public class HorizontalLineDecoratorDrawer : DecoratorDrawer
     {
         public override float GetHeight()
         {
-            var lineAttr = (Attributes.Drawer.HorizontalLineAttribute)attribute;
+            var lineAttr = (HorizontalLineAttribute)attribute;
             return EditorGUIUtility.singleLineHeight + lineAttr.Height;
         }
 
@@ -18,7 +19,7 @@ namespace ASPax.Editor
         {
             var rect = EditorGUI.IndentedRect(position);
             rect.y += EditorGUIUtility.singleLineHeight / 3.0f;
-            var lineAttr = (Attributes.Drawer.HorizontalLineAttribute)attribute;
+            var lineAttr = (HorizontalLineAttribute)attribute;
             NaughtyEditorGUI.HorizontalLine(rect, lineAttr.Height, lineAttr.Color.GetColor());
         }
     }

@@ -1,11 +1,12 @@
-﻿using UnityEngine;
-using UnityEditor;
+﻿using UnityEditor;
+using UnityEngine;
 
 namespace ASPax.Editor
 {
-    using ASPax.Attributes.Utility;
+    using Attributes.Drawer;
+    using Attributes.Utility;
 
-    [CustomPropertyDrawer(typeof(Attributes.Drawer.CurveRangeAttribute))]
+    [CustomPropertyDrawer(typeof(CurveRangeAttribute))]
     public class CurveRangePropertyDrawer : PropertyDrawerBase
     {
         protected override float GetPropertyHeight_Internal(SerializedProperty property, GUIContent label)
@@ -25,16 +26,16 @@ namespace ASPax.Editor
                 return;
             }
 
-            var curveRangeAttribute = (Attributes.Drawer.CurveRangeAttribute)attribute;
+            var curveRangeAttribute = (CurveRangeAttribute)attribute;
             var curveRanges = new Rect()
-            { 
+            {
                 x = curveRangeAttribute.Min.x,
                 y = curveRangeAttribute.Min.y,
                 width = curveRangeAttribute.Max.x - curveRangeAttribute.Min.x,
                 height = curveRangeAttribute.Max.y - curveRangeAttribute.Min.y
             };
 
-            EditorGUI.CurveField( rect, property, curveRangeAttribute.Color == EColor.Clear ? Color.green : curveRangeAttribute.Color.GetColor(), curveRanges, label);
+            EditorGUI.CurveField(rect, property, curveRangeAttribute.Color == UColor.Clear ? Color.green : curveRangeAttribute.Color.GetColor(), curveRanges, label);
             EditorGUI.EndProperty();
         }
     }

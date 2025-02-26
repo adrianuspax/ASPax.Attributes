@@ -1,12 +1,14 @@
-﻿using UnityEngine;
-using UnityEditor;
+﻿using System;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System;
+using UnityEditor;
+using UnityEngine;
 
 namespace ASPax.Editor
 {
-    [CustomPropertyDrawer(typeof(Attributes.Drawer.SceneAttribute))]
+    using Attributes.Drawer;
+
+    [CustomPropertyDrawer(typeof(SceneAttribute))]
     public class ScenePropertyDrawer : PropertyDrawerBase
     {
         private const string SceneListItem = "{0} ({1})";

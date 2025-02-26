@@ -2,35 +2,37 @@
 
 namespace ASPax.Attributes.Drawer
 {
+    using Utility;
+
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
     public class ProgressBarAttribute : DrawerAttribute
     {
         private readonly string name;
         private readonly float maxValue;
         private readonly string maxValueName;
-        private readonly Utility.EColor color;
+        private readonly UColor color;
 
-        public ProgressBarAttribute(string name, float maxValue, Utility.EColor color = Utility.EColor.Blue)
+        public ProgressBarAttribute(string name, float maxValue, UColor color = UColor.Blue)
         {
             this.name = name;
             this.maxValue = maxValue;
             this.color = color;
         }
 
-        public ProgressBarAttribute(string name, string maxValueName, Utility.EColor color = Utility.EColor.Blue)
+        public ProgressBarAttribute(string name, string maxValueName, UColor color = UColor.Blue)
         {
             this.name = name;
             this.maxValueName = maxValueName;
             this.color = color;
         }
 
-        public ProgressBarAttribute(float maxValue, Utility.EColor color = Utility.EColor.Blue) : this(string.Empty, maxValue, color) { }
+        public ProgressBarAttribute(float maxValue, UColor color = UColor.Blue) : this(string.Empty, maxValue, color) { }
 
-        public ProgressBarAttribute(string maxValueName, Utility.EColor color = Utility.EColor.Blue) : this(string.Empty, maxValueName, color) { }
+        public ProgressBarAttribute(string maxValueName, UColor color = UColor.Blue) : this(string.Empty, maxValueName, color) { }
 
         public string Name => name;
-        public float MaxValue =>  maxValue;
+        public float MaxValue => maxValue;
         public string MaxValueName => maxValueName;
-        public Utility.EColor Color => color;
+        public UColor Color => color;
     }
 }

@@ -3,7 +3,9 @@ using UnityEngine;
 
 namespace ASPax.Editor
 {
-    [CustomPropertyDrawer(typeof(Attributes.Drawer.InfoBoxAttribute))]
+    using Attributes.Drawer;
+
+    [CustomPropertyDrawer(typeof(InfoBoxAttribute))]
     public class InfoBoxDecoratorDrawer : DecoratorDrawer
     {
         public override float GetHeight()
@@ -13,7 +15,7 @@ namespace ASPax.Editor
 
         public override void OnGUI(Rect rect)
         {
-            var infoBoxAttribute = (Attributes.Drawer.InfoBoxAttribute)attribute;
+            var infoBoxAttribute = (InfoBoxAttribute)attribute;
             var indentLength = NaughtyEditorGUI.GetIndentLength(rect);
             var infoBoxRect = new Rect()
             {
@@ -22,14 +24,14 @@ namespace ASPax.Editor
                 width = rect.width - indentLength,
                 height = GetHelpBoxHeight()
             };
-                
+
 
             DrawInfoBox(infoBoxRect, infoBoxAttribute.Text, infoBoxAttribute.Type);
         }
 
         private float GetHelpBoxHeight()
         {
-            var infoBoxAttribute = (Attributes.Drawer.InfoBoxAttribute)attribute;
+            var infoBoxAttribute = (InfoBoxAttribute)attribute;
             var minHeight = EditorGUIUtility.singleLineHeight * 2.0f;
             var desiredHeight = GUI.skin.box.CalcHeight(new GUIContent(infoBoxAttribute.Text), EditorGUIUtility.currentViewWidth);
             var height = Mathf.Max(minHeight, desiredHeight);
@@ -37,20 +39,20 @@ namespace ASPax.Editor
             return height;
         }
 
-        private void DrawInfoBox(Rect rect, string infoText, Attributes.Drawer.EInfoBoxType infoBoxType)
+        private void DrawInfoBox(Rect rect, string infoText, InfoBoxType infoBoxType)
         {
             var messageType = MessageType.None;
             switch (infoBoxType)
             {
-                case Attributes.Drawer.EInfoBoxType.Normal:
+                case InfoBoxType.Normal:
                     messageType = MessageType.Info;
                     break;
 
-                case Attributes.Drawer.EInfoBoxType.Warning:
+                case InfoBoxType.Warning:
                     messageType = MessageType.Warning;
                     break;
 
-                case Attributes.Drawer.EInfoBoxType.Error:
+                case InfoBoxType.Error:
                     messageType = MessageType.Error;
                     break;
             }

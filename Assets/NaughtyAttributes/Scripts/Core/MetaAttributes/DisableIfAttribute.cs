@@ -2,6 +2,8 @@
 
 namespace ASPax.Attributes.Meta
 {
+    using Utility;
+
     [AttributeUsage(AttributeTargets.Field | AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
     public class DisableIfAttribute : EnableIfAttributeBase
     {
@@ -10,7 +12,7 @@ namespace ASPax.Attributes.Meta
             isInverted = true;
         }
 
-        public DisableIfAttribute(Utility.EConditionOperator conditionOperator, params string[] conditions) : base(conditionOperator, conditions)
+        public DisableIfAttribute(UConditionOperator conditionOperator, params string[] conditions) : base(conditionOperator, conditions)
         {
             isInverted = true;
         }

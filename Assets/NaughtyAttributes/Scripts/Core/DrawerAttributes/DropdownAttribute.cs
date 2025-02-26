@@ -1,5 +1,5 @@
-﻿using System.Collections;
-using System;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace ASPax.Attributes.Drawer
@@ -9,14 +9,14 @@ namespace ASPax.Attributes.Drawer
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
     public class DropdownAttribute : DrawerAttribute
     {
-        private readonly string valuesName;
+        private readonly string _valuesName;
 
         public DropdownAttribute(string valuesName)
         {
-            this.valuesName = valuesName;
+            _valuesName = valuesName;
         }
 
-        public string ValuesName => valuesName;
+        public string ValuesName => _valuesName;
     }
 
     public class DropdownList<T> : IDropdownList
@@ -25,7 +25,7 @@ namespace ASPax.Attributes.Drawer
 
         public DropdownList()
         {
-            _values = new List<KeyValuePair<string, object>>();
+            _values = new();
         }
 
         public void Add(string displayName, T value)
@@ -45,12 +45,10 @@ namespace ASPax.Attributes.Drawer
 
         public static explicit operator DropdownList<object>(DropdownList<T> target)
         {
-            DropdownList<object> result = new();
+            var result = new DropdownList<object>();
 
             foreach (var kvp in target)
-            {
                 result.Add(kvp.Key, kvp.Value);
-            }
 
             return result;
         }

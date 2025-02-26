@@ -1,11 +1,13 @@
-﻿using UnityEngine;
-using UnityEditor;
+﻿using System;
 using System.Text.RegularExpressions;
-using System;
+using UnityEditor;
+using UnityEngine;
 
 namespace ASPax.Editor
 {
-    [CustomPropertyDrawer(typeof(Attributes.Drawer.ResizableTextAreaAttribute))]
+    using Attributes.Drawer;
+
+    [CustomPropertyDrawer(typeof(ResizableTextAreaAttribute))]
     public class ResizableTextAreaPropertyDrawer : PropertyDrawerBase
     {
         protected override float GetPropertyHeight_Internal(SerializedProperty property, GUIContent label)
@@ -54,7 +56,7 @@ namespace ASPax.Editor
             }
             else
             {
-                var message = typeof(Attributes.Drawer.ResizableTextAreaAttribute).Name + " can only be used on string fields";
+                var message = typeof(ResizableTextAreaAttribute).Name + " can only be used on string fields";
                 DrawDefaultPropertyAndHelpBox(rect, property, message, MessageType.Warning);
             }
 

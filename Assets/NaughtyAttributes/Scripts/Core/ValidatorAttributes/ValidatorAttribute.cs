@@ -2,5 +2,6 @@
 
 namespace ASPax.Attributes.Validator
 {
-    public class ValidatorAttribute : Attribute, Utility.INaughtyAttribute { }
+    using Utility;
+    public class ValidatorAttribute : Attribute, IASPaxAttribute { }
 }

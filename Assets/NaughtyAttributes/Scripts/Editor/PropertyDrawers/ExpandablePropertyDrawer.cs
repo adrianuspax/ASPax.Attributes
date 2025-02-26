@@ -1,9 +1,10 @@
-﻿using UnityEditor;
+﻿using System;
+using UnityEditor;
 using UnityEngine;
 
 namespace ASPax.Editor
 {
-    using ASPax.Attributes.Drawer;
+    using Attributes.Drawer;
 
     [CustomPropertyDrawer(typeof(ExpandableAttribute))]
     public class ExpandablePropertyDrawer : PropertyDrawerBase
@@ -35,7 +36,7 @@ namespace ASPax.Editor
                             {
                                 SerializedProperty childProperty = serializedObject.FindProperty(iterator.name);
 
-                                if (childProperty.name.Equals("m_Script", System.StringComparison.Ordinal))
+                                if (childProperty.name.Equals("m_Script", StringComparison.Ordinal))
                                     continue;
 
                                 var visible = PropertyUtility.IsVisible(childProperty);

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace ASPax.Editor
 {
-    using ASPax.Attributes.Drawer.SpecialCases;
+    using Attributes.Drawer.SpecialCases;
 
     public class ReorderableListPropertyDrawer : SpecialCasePropertyDrawerBase
     {

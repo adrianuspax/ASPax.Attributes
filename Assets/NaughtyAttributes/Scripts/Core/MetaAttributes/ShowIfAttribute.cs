@@ -2,6 +2,8 @@
 
 namespace ASPax.Attributes.Meta
 {
+    using Utility;
+
     [AttributeUsage(AttributeTargets.Field | AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
     public class ShowIfAttribute : ShowIfAttributeBase
     {
@@ -10,7 +12,7 @@ namespace ASPax.Attributes.Meta
             isInverted = false;
         }
 
-        public ShowIfAttribute(Utility.EConditionOperator conditionOperator, params string[] conditions) : base(conditionOperator, conditions)
+        public ShowIfAttribute(UConditionOperator conditionOperator, params string[] conditions) : base(conditionOperator, conditions)
         {
             isInverted = false;
         }

@@ -2,7 +2,7 @@
 
 namespace ASPax.Attributes.Drawer
 {
-    public enum EInfoBoxType
+    public enum InfoBoxType
     {
         Normal,
         Warning,
@@ -12,16 +12,16 @@ namespace ASPax.Attributes.Drawer
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = true, Inherited = true)]
     public class InfoBoxAttribute : DrawerAttribute
     {
-        private readonly string text;
-        private readonly EInfoBoxType type;
+        private readonly string _text;
+        private readonly InfoBoxType _type;
 
-        public InfoBoxAttribute(string text, EInfoBoxType type = EInfoBoxType.Normal)
+        public InfoBoxAttribute(string text, InfoBoxType type = InfoBoxType.Normal)
         {
-            this.text = text;
-            this.type = type;
+            _text = text;
+            _type = type;
         }
 
-        public string Text => text;
-        public EInfoBoxType Type => type;
+        public string Text => _text;
+        public InfoBoxType Type => _type;
     }
 }

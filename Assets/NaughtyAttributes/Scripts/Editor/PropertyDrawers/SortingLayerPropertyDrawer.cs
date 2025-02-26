@@ -1,11 +1,13 @@
-﻿using UnityEngine;
-using UnityEditor;
-using System;
+﻿using System;
 using System.Reflection;
+using UnityEditor;
+using UnityEngine;
 
 namespace ASPax.Editor
 {
-    [CustomPropertyDrawer(typeof(Attributes.Drawer.SortingLayerAttribute))]
+    using Attributes.Drawer;
+
+    [CustomPropertyDrawer(typeof(SortingLayerAttribute))]
     public class SortingLayerPropertyDrawer : PropertyDrawerBase
     {
         private const string TypeWarningMessage = "{0} must be an int or a string";

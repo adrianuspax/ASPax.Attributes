@@ -5,16 +5,16 @@ namespace ASPax.Attributes.Validator
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
     public class ValidateInputAttribute : ValidatorAttribute
     {
-        private readonly string callbackName;
-        private readonly string message;
+        private readonly string _callbackName;
+        private readonly string _message;
 
         public ValidateInputAttribute(string callbackName, string message = null)
         {
-            this.callbackName = callbackName;
-            this.message = message;
+            _callbackName = callbackName;
+            _message = message;
         }
 
-        public string CallbackName => callbackName;
-        public string Message => message;
+        public string CallbackName => _callbackName;
+        public string Message => _message;
     }
 }

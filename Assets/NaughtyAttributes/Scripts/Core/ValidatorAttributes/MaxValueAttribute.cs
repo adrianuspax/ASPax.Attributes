@@ -5,18 +5,18 @@ namespace ASPax.Attributes.Validator
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
     public class MaxValueAttribute : ValidatorAttribute
     {
-        private readonly float maxValue;
+        private readonly float _maxValue;
 
         public MaxValueAttribute(float maxValue)
         {
-            this.maxValue = maxValue;
+            _maxValue = maxValue;
         }
 
         public MaxValueAttribute(int maxValue)
         {
-            this.maxValue = maxValue;
+            _maxValue = maxValue;
         }
 
-        public float MaxValue => maxValue;
+        public float MaxValue => _maxValue;
     }
 }

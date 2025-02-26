@@ -5,19 +5,19 @@ namespace ASPax.Attributes.Drawer
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
     public class ShowAssetPreviewAttribute : DrawerAttribute
     {
-        public const int DefaultWidth = 64;
-        public const int DefaultHeight = 64;
+        public const int WIDTH = 64;
+        public const int HEIGHT = 64;
 
-        private readonly int width;
-        private readonly int height;
+        private readonly int _width;
+        private readonly int _height;
 
-        public ShowAssetPreviewAttribute(int width = DefaultWidth, int height = DefaultHeight)
+        public ShowAssetPreviewAttribute(int width = WIDTH, int height = HEIGHT)
         {
-            this.width = width;
-            this.height = height;
+            _width = width;
+            _height = height;
         }
 
-        public int Width => width;
-        public int Height => height;
+        public int Width => _width;
+        public int Height => _height;
     }
 }
