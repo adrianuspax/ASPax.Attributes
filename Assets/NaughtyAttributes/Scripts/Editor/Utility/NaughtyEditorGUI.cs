@@ -15,7 +15,6 @@ namespace ASPax.Editor
     {
         public const float IndentLength = 15.0f;
         public const float HorizontalSpacing = 2.0f;
-
         private static readonly GUIStyle _buttonStyle = new(GUI.skin.button) { richText = true };
         private delegate void PropertyFieldFunction(Rect rect, SerializedProperty property, GUIContent label, bool includeChildren);
 
@@ -26,8 +25,7 @@ namespace ASPax.Editor
 
         public static void PropertyField_Layout(SerializedProperty property, bool includeChildren)
         {
-            var dummyRect = new Rect();
-            PropertyField_Implementation(dummyRect, property, includeChildren, DrawPropertyField_Layout);
+            PropertyField_Implementation(new(), property, includeChildren, DrawPropertyField_Layout);
         }
 
         private static void DrawPropertyField(Rect rect, SerializedProperty property, GUIContent label, bool includeChildren)
@@ -44,11 +42,7 @@ namespace ASPax.Editor
         {
             var specialCaseAttribute = PropertyUtility.GetAttribute<SpecialCaseDrawerAttribute>(property);
 
-            if (specialCaseAttribute != null)
-            {
-                specialCaseAttribute.GetDrawer().OnGUI(rect, property);
-            }
-            else
+            if (specialCaseAttribute == null)
             {
                 var visible = PropertyUtility.IsVisible(property); // Check if visible
 
@@ -69,6 +63,10 @@ namespace ASPax.Editor
 
                 if (EditorGUI.EndChangeCheck()) // Call OnValueChanged callbacks
                     PropertyUtility.CallOnValueChangedCallbacks(property);
+            }
+            else
+            {
+                specialCaseAttribute.GetDrawer().OnGUI(rect, property);
             }
         }
 
@@ -113,7 +111,9 @@ namespace ASPax.Editor
             if (dropdownValue == null || !dropdownValue.Equals(newValue))
             {
                 Undo.RecordObject(serializedObject.targetObject, "Dropdown");
-                dropdownField.SetValue(target, newValue); // TODO: Problem with structs, because they are value type. // The solution is to make boxing/unboxing but unfortunately I don't know the compile time type of the target object
+                // TODO: Problem with structs, because they are value type.
+                // The solution is to make boxing/unboxing but unfortunately I don't know the compile time type of the target object
+                dropdownField.SetValue(target, newValue);
             }
         }
 
@@ -143,18 +143,21 @@ namespace ASPax.Editor
                 if (GUILayout.Button(buttonText, _buttonStyle))
                 {
                     var defaultParams = methodInfo.GetParameters().Select(p => p.DefaultValue).ToArray();
+                    var methodResult = (IEnumerator)methodInfo.Invoke(target, defaultParams);
 
                     if (!Application.isPlaying)
                     {
+
                         EditorUtility.SetDirty(target); // Set target object and scene dirty to serialize changes to disk
+
                         var stage = PrefabStageUtility.GetCurrentPrefabStage();
 
-                        if (stage != null)
-                            EditorSceneManager.MarkSceneDirty(stage.scene); // Prefab mode
-                        else
+                        if (stage == null)
                             EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene()); // Normal scene
+                        else
+                            EditorSceneManager.MarkSceneDirty(stage.scene); // Prefab mode
                     }
-                    else if (methodInfo.Invoke(target, defaultParams) is IEnumerator methodResult && target is MonoBehaviour behaviour)
+                    else if (methodResult != null && target is MonoBehaviour behaviour)
                     {
                         behaviour.StartCoroutine(methodResult);
                     }
@@ -164,7 +167,7 @@ namespace ASPax.Editor
             }
             else
             {
-                var warning = typeof(ButtonAttribute).Name + " works only on methods with no parameters";
+                string warning = typeof(ButtonAttribute).Name + " works only on methods with no parameters";
                 HelpBox_Layout(warning, MessageType.Warning, context: target, logToConsole: true);
             }
         }
